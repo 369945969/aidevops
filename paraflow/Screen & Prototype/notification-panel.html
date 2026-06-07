@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>通知中心 - AI DevOps Orchestrator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<!-- Vertical Layout: Top Header + Main Content (no sidebars) -->
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Header (Primary Nav) -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <div class="flex items-center justify-between w-full px-8 py-3">
+      <!-- Left Section -->
+      <div class="flex items-center gap-8">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-6 h-6">
+            <iconify-icon icon="lucide:workflow" class="text-xl text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-base font-semibold text-[#0D7C7C]">AI DevOps</span>
+        </div>
+        <!-- Menu Items -->
+        <div class="flex items-center gap-6">
+          <a href="dashboard.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:layout-grid" class="text-sm"></iconify-icon></div>
+            <span>工作流看板</span>
+          </a>
+          <a href="requirements.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:file-text" class="text-sm"></iconify-icon></div>
+            <span>需求管理</span>
+          </a>
+          <a href="knowledge-base.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:library" class="text-sm"></iconify-icon></div>
+            <span>知识库</span>
+          </a>
+          <a href="settings.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:settings" class="text-sm"></iconify-icon></div>
+            <span>系统设置</span>
+          </a>
+        </div>
+      </div>
+      <!-- Right Section -->
+      <div class="flex items-center gap-4">
+        <!-- Search -->
+        <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:search" class="text-sm text-[#6B7680]"></iconify-icon></div>
+          <span class="text-sm text-[#9BA3AB]">搜索任务或需求...</span>
+        </div>
+        <!-- New Requirement Button -->
+        <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon></div>
+          <span class="whitespace-nowrap text-sm">新建需求</span>
+        </a>
+        <!-- Notification - active state since we're on the notification page -->
+        <a href="notification-panel.html" class="relative flex items-center justify-center w-10 h-10 cursor-pointer">
+          <iconify-icon icon="lucide:bell" class="w-5 h-5 text-[#0D7C7C]"></iconify-icon>
+          <div class="absolute -top-1 -right-1 w-5 h-5 bg-[#D93025] rounded-full flex items-center justify-center"><span class="text-xs text-white/95">3</span></div>
+        </a>
+        <!-- Avatar -->
+        <div class="flex items-center gap-2">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" class="w-9 h-9 rounded-full">
+          <iconify-icon icon="lucide:chevron-down" class="w-4 h-4 text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+    <main class="flex-1 overflow-x-hidden flex flex-col px-12 py-6">
+      <!-- Page Title Area -->
+      <div class="flex items-center justify-between mb-5">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">通知中心</h1>
+        <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full transition hover:opacity-80 text-sm">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:check-check" class="text-sm text-[#4A5259]"></iconify-icon></div>
+          <span class="whitespace-nowrap">标记全部已读</span>
+        </button>
+      </div>
+
+      <!-- Filter Tabs (peer-checked pattern) -->
+      <div class="flex gap-2 mb-6 overflow-x-auto hide-scrollbar">
+        <label class="cursor-pointer">
+          <input type="radio" name="notif-filter" class="sr-only peer" checked>
+          <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-sm">待审核通知</div>
+        </label>
+        <label class="cursor-pointer">
+          <input type="radio" name="notif-filter" class="sr-only peer">
+          <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-sm">系统通知</div>
+        </label>
+        <label class="cursor-pointer">
+          <input type="radio" name="notif-filter" class="sr-only peer">
+          <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-sm">全部</div>
+        </label>
+      </div>
+
+      <!-- Notification List -->
+      <div class="flex flex-col gap-4">
+
+        <!-- Card 1: 架构方案REQ-0008待审核 -->
+        <a href="architecture-review.html" class="bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] rounded-2xl flex items-center gap-5 p-5 border-l-4 border-l-[#F59D0D] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer group">
+          <!-- Icon -->
+          <div class="flex items-center justify-center w-10 h-10 bg-[#FEF6E8] rounded-xl shrink-0">
+            <iconify-icon icon="lucide:shield-check" class="text-lg text-[#F59D0D]"></iconify-icon>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-base font-semibold text-[#1A1F24]">架构方案REQ-0008待审核</span>
+              <div class="bg-[#FEF6E8] text-[#F59D0D] px-3 py-1 rounded-full text-xs font-semibold shrink-0">审核通知</div>
+            </div>
+            <p class="text-sm text-[#6B7680]">AI架构师Agent已完成多语言支持模块架构设计，需要您进行人工审核后方可进入开发阶段。</p>
+          </div>
+          <!-- Time & Arrow -->
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-sm text-[#9BA3AB]">30分钟前</span>
+            <iconify-icon icon="lucide:chevron-right" class="w-5 h-5 text-[#9BA3AB] group-hover:text-[#0D7C7C] transition"></iconify-icon>
+          </div>
+        </a>
+
+        <!-- Card 2: 部署计划REQ-0002需人工审核 -->
+        <a href="deploy-review.html" class="bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] rounded-2xl flex items-center gap-5 p-5 border-l-4 border-l-[#D93025] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer group">
+          <!-- Icon -->
+          <div class="flex items-center justify-center w-10 h-10 bg-[#FDECEA] rounded-xl shrink-0">
+            <iconify-icon icon="lucide:rocket" class="text-lg text-[#D93025]"></iconify-icon>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-base font-semibold text-[#1A1F24]">部署计划REQ-0002需人工审核</span>
+              <div class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold shrink-0">审核通知</div>
+            </div>
+            <p class="text-sm text-[#6B7680]">支付模块v2部署计划已生成，涉及生产环境变更，需要人工审核确认后方可执行部署。</p>
+          </div>
+          <!-- Time & Arrow -->
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-sm text-[#9BA3AB]">2小时前</span>
+            <iconify-icon icon="lucide:chevron-right" class="w-5 h-5 text-[#9BA3AB] group-hover:text-[#0D7C7C] transition"></iconify-icon>
+          </div>
+        </a>
+
+        <!-- Card 3: 权限管理代码合并审核 -->
+        <a href="code-review.html" class="bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] rounded-2xl flex items-center gap-5 p-5 border-l-4 border-l-[#F59D0D] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer group">
+          <!-- Icon -->
+          <div class="flex items-center justify-center w-10 h-10 bg-[#FEF6E8] rounded-xl shrink-0">
+            <iconify-icon icon="lucide:git-merge" class="text-lg text-[#F59D0D]"></iconify-icon>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-base font-semibold text-[#1A1F24]">权限管理代码合并审核</span>
+              <div class="bg-[#FEF6E8] text-[#F59D0D] px-3 py-1 rounded-full text-xs font-semibold shrink-0">审核通知</div>
+            </div>
+            <p class="text-sm text-[#6B7680]">REQ-0005权限管理代码已完成合并请求，需要人工审核代码变更后方可合入主干分支。</p>
+          </div>
+          <!-- Time & Arrow -->
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-sm text-[#9BA3AB]">4小时前</span>
+            <iconify-icon icon="lucide:chevron-right" class="w-5 h-5 text-[#9BA3AB] group-hover:text-[#0D7C7C] transition"></iconify-icon>
+          </div>
+        </a>
+
+        <!-- Card 4: REQ-0007任务已完成开发 -->
+        <a href="task-detail.html" class="bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] rounded-2xl flex items-center gap-5 p-5 border-l-4 border-l-[#0F8B5D] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer group">
+          <!-- Icon -->
+          <div class="flex items-center justify-center w-10 h-10 bg-[#E8F7F0] rounded-xl shrink-0">
+            <iconify-icon icon="lucide:check-circle" class="text-lg text-[#0F8B5D]"></iconify-icon>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-base font-semibold text-[#1A1F24]">REQ-0007任务已完成开发</span>
+              <div class="bg-[#E8F7F0] text-[#0F8B5D] px-3 py-1 rounded-full text-xs font-semibold shrink-0">进度通知</div>
+            </div>
+            <p class="text-sm text-[#6B7680]">短信验证码API及前端表单开发任务已全部完成，已自动流转至测试阶段。</p>
+          </div>
+          <!-- Time -->
+          <iconify-icon icon="lucide:chevron-right" class="w-5 h-5 text-[#9BA3AB] group-hover:text-[#0D7C7C] transition"></iconify-icon>
+        </a>
+
+        <!-- Card 5: 系统更新 -->
+        <a href="settings-ai-agent.html" class="bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] rounded-2xl flex items-center gap-5 p-5 border-l-4 border-l-[#3367D6] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer group">
+          <!-- Icon -->
+          <div class="flex items-center justify-center w-10 h-10 bg-[#E8F0FE] rounded-xl shrink-0">
+            <iconify-icon icon="lucide:info" class="text-lg text-[#3367D6]"></iconify-icon>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-base font-semibold text-[#1A1F24]">系统更新: AI架构师Agent v2.3已上线</span>
+              <div class="bg-[#E8F0FE] text-[#3367D6] px-3 py-1 rounded-full text-xs font-semibold shrink-0">系统通知</div>
+            </div>
+            <p class="text-sm text-[#6B7680]">AI架构师Agent已升级至v2.3版本，新增微服务拆分建议能力和架构安全审查功能。</p>
+          </div>
+          <!-- Time -->
+          <iconify-icon icon="lucide:chevron-right" class="w-5 h-5 text-[#9BA3AB] group-hover:text-[#0D7C7C] transition"></iconify-icon>
+        </a>
+
+        <!-- Card 6: 审核超时提醒 -->
+        <a href="architecture-review.html" class="bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] rounded-2xl flex items-center gap-5 p-5 border-l-4 border-l-[#D93025] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)] cursor-pointer group">
+          <!-- Icon -->
+          <div class="flex items-center justify-center w-10 h-10 bg-[#FDECEA] rounded-xl shrink-0">
+            <iconify-icon icon="lucide:alert-triangle" class="text-lg text-[#D93025]"></iconify-icon>
+          </div>
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="text-base font-semibold text-[#1A1F24]">审核超时提醒: REQ-0001架构审核已超过24小时</span>
+              <div class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold shrink-0">超时提醒</div>
+            </div>
+            <p class="text-sm text-[#6B7680]">REQ-0001用户系统重构架构方案审核已超过24小时未处理，相关开发任务处于阻塞状态，请尽快完成审核。</p>
+          </div>
+          <!-- Time -->
+          <iconify-icon icon="lucide:chevron-right" class="w-5 h-5 text-[#9BA3AB] group-hover:text-[#0D7C7C] transition"></iconify-icon>
+        </a>
+
+      </div>
+
+      <!-- Real-time Sync Indicator -->
+      <div class="flex items-center justify-end gap-2 mt-5">
+        <div class="flex items-center gap-2 bg-white border border-[#E1E6EA] rounded-full px-4 py-2">
+          <div class="w-2 h-2 rounded-full bg-[#0F8B5D] pulse-dot"></div>
+          <span class="text-sm text-[#4A5259]">实时同步中</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

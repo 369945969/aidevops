@@ -1,0 +1,28 @@
+/* AI DevOps Orchestrator - Tailwind CDN Setup */
+/* This project uses Tailwind CSS utility classes directly per Style Guide.
+   No custom CSS classes should be created. All styling via Tailwind utilities. */
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Smooth scrolling */
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Scrollbar hiding for tag groups */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Line clamping */
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Kanban column min-height */
+.kanban-scroll::-webkit-scrollbar { height: 4px; }
+.kanban-scroll::-webkit-scrollbar-thumb { background: #CBD3DA; border-radius: 9999px; }
+
+/* Code diff syntax highlight */
+.code-font { font-family: "SF Mono", "Fira Code", "Consolas", monospace; }
+
+/* Pulse animation for sync indicator */
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.pulse-dot { animation: pulse-dot 2s infinite; }

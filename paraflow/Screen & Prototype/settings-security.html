@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>安全与权限 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between w-full px-8 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+      </div>
+      <ul class="flex items-center gap-6 text-sm">
+        <li><a href="dashboard.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">工作流看板</a></li>
+        <li><a href="requirements.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">需求管理</a></li>
+        <li><a href="knowledge-base.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">知识库</a></li>
+        <li><a href="settings.html" class="text-[#0D7C7C] font-semibold cursor-pointer">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+        </div>
+        <span>搜索...</span>
+      </div>
+      <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">新建需求</span>
+      </a>
+      <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+      </a>
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar Nav -->
+    <aside class="flex-shrink-0 min-w-fit w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] py-4">
+      <nav class="flex flex-col">
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:cpu" class="text-base"></iconify-icon>
+          </div>
+          <span>自动化配置</span>
+        </a>
+        <a href="settings-review-rules.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
+          </div>
+          <span>审核规则</span>
+        </a>
+        <a href="settings-dev-environment.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:terminal" class="text-base"></iconify-icon>
+          </div>
+          <span>开发环境</span>
+        </a>
+        <a href="settings-model-management.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:brain" class="text-base"></iconify-icon>
+          </div>
+          <span>模型管理</span>
+        </a>
+        <a href="settings-ai-agent.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base"></iconify-icon>
+          </div>
+          <span>AI Agent配置</span>
+        </a>
+        <a href="settings-team-members.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:users" class="text-base"></iconify-icon>
+          </div>
+          <span>团队成员</span>
+        </a>
+        <a href="settings-notifications.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base"></iconify-icon>
+          </div>
+          <span>通知设置</span>
+        </a>
+        <a href="settings-integrations.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plug" class="text-base"></iconify-icon>
+          </div>
+          <span>集成配置</span>
+        </a>
+        <a href="settings-security.html" class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#0D7C7C] border-l-2 border-[#0D7C7C] bg-[hsla(200,20%,98%,1)] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:lock" class="text-base"></iconify-icon>
+          </div>
+          <span>安全与权限</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:credit-card" class="text-base"></iconify-icon>
+          </div>
+          <span>账单与订阅</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Page Title + Actions -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">安全与权限</h1>
+        <div class="flex items-center gap-3">
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">保存更改</span>
+          </button>
+          <a href="settings.html" class="text-sm text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">恢复默认设置</a>
+        </div>
+      </div>
+
+      <!-- RBAC Role Definition Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">RBAC角色定义</h3>
+          <p class="text-sm text-[#6B7680] mt-1">基于角色的访问控制权限矩阵</p>
+        </div>
+
+        <!-- Permissions Matrix Table -->
+        <div class="overflow-hidden rounded-xl border border-[#E1E6EA]">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-[hsla(200,15%,95%,1)]">
+                <th class="px-4 py-3 text-left text-xs font-semibold text-[#4A5259]">权限项</th>
+                <th class="px-4 py-3 text-center text-xs font-semibold text-[#0D7C7C]">管理员</th>
+                <th class="px-4 py-3 text-center text-xs font-semibold text-[#4A5259]">成员</th>
+                <th class="px-4 py-3 text-center text-xs font-semibold text-[#9BA3AB]">观察者</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">查看需求</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">创建需求</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">审核架构方案</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:minus" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">代码合并</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">生产部署</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">系统配置</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">成员管理</td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:check" class="text-base text-[#0D7C7C]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+                <td class="px-4 py-3 text-center"><iconify-icon icon="lucide:x" class="text-base text-[#9BA3AB]"></iconify-icon></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Data Encryption Settings Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">数据加密设置</h3>
+          <p class="text-sm text-[#6B7680] mt-1">配置数据存储和传输加密策略</p>
+        </div>
+
+        <!-- 数据库加密 (ON) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:database" class="text-base text-[#1A1F24]"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">数据库加密</span>
+                <p class="text-sm text-[#6B7680]">对存储在数据库中的敏感数据进行AES-256加密</p>
+              </div>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- API通信加密 (ON) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:shield" class="text-base text-[#1A1F24]"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">API通信加密</span>
+                <p class="text-sm text-[#6B7680]">所有API通信强制使用TLS 1.3加密传输</p>
+              </div>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-Factor Authentication Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">两步验证配置</h3>
+          <p class="text-sm text-[#6B7680] mt-1">增强账户安全性的二次验证机制</p>
+        </div>
+
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">启用两步验证</span>
+              <p class="text-sm text-[#6B7680]">登录时需要输入验证码或使用认证器应用确认</p>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-2xl p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:info" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#0D7C7C]">两步验证设置说明</span>
+          </div>
+          <p class="text-sm text-[#4A5259]">已启用两步验证。请确保所有团队成员已配置认证器应用(TOTP)。管理员可在成员管理页面查看各成员的验证配置状态。</p>
+        </div>
+      </div>
+
+      <!-- Audit Log Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">操作审计日志</h3>
+          <p class="text-sm text-[#6B7680] mt-1">记录所有关键操作以供安全审计</p>
+        </div>
+
+        <div class="overflow-hidden rounded-xl border border-[#E1E6EA]">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-[hsla(200,15%,95%,1)]">
+                <th class="px-4 py-3 text-left text-xs font-semibold text-[#4A5259]">时间</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-[#4A5259]">操作者</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-[#4A5259]">操作</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-[#4A5259]">目标</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-[#4A5259]">结果</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-06 14:30</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">Alex Chen</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">修改配置</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">自动化级别</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-06 12:15</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">Sarah Wang</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">创建需求</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">REQ-2026-042</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-06 10:00</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">AI Agent(架构师)</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">生成方案</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">REQ-2026-040</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-05 23:45</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">David Li</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">部署操作</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">生产环境 v2.3.1</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-05 18:30</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">Alex Chen</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">审核通过</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">架构方案 #38</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-05 16:20</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">Emma Zhang</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">代码合并</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">PR #127</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-05 14:10</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">AI Agent(后端)</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">代码生成</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">API模块</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-05 11:00</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">Alex Chen</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">添加密钥</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">AWS凭证</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-04 20:15</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">Sarah Wang</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">更新需求</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">REQ-2026-039</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#0D7C7C]"><iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>成功</div></td>
+              </tr>
+              <tr class="border-t border-[#E1E6EA]">
+                <td class="px-4 py-3 text-xs text-[#9BA3AB]">06-04 09:30</td>
+                <td class="px-4 py-3 text-sm text-[#1A1F24]">AI Agent(测试)</td>
+                <td class="px-4 py-3 text-sm text-[#E5484D]">执行失败</td>
+                <td class="px-4 py-3 text-sm text-[#4A5259]">集成测试套件</td>
+                <td class="px-4 py-3"><div class="flex items-center gap-1 text-xs text-[#E5484D]"><iconify-icon icon="lucide:x-circle" class="text-xs"></iconify-icon>失败</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Password Policy Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">密码策略</h3>
+          <p class="text-sm text-[#6B7680] mt-1">配置账户密码安全要求</p>
+        </div>
+
+        <!-- Minimum Length Slider -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <span class="text-sm font-semibold text-[#1A1F24]">密码最小长度</span>
+          <div class="flex items-center gap-4 mt-3">
+            <div class="flex-1">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 80%;"></div>
+              </div>
+            </div>
+            <span class="text-sm font-semibold text-[#0D7C7C]">12位</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB] mt-1">
+            <span>6位</span>
+            <span>20位</span>
+          </div>
+        </div>
+
+        <!-- Password Expiry Dropdown -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">密码过期时间</label>
+            <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+              <span class="text-sm text-[#1A1F24]">90天</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-[#FEF6E8] border-t border-[#F59D0D] px-8 py-3 flex items-center justify-between">
+    <span class="text-sm text-[#F59D0D] font-semibold flex items-center gap-2">
+      <div class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:alert-circle" class="text-base text-[#F59D0D]"></iconify-icon>
+      </div>
+      您有未保存的更改
+    </span>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:x" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">取消</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">保存更改</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>模型管理 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between w-full px-8 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+      </div>
+      <ul class="flex items-center gap-6 text-sm">
+        <li><a href="dashboard.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">工作流看板</a></li>
+        <li><a href="requirements.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">需求管理</a></li>
+        <li><a href="knowledge-base.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">知识库</a></li>
+        <li><a href="settings.html" class="text-[#0D7C7C] font-semibold cursor-pointer">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+        </div>
+        <span>搜索...</span>
+      </div>
+      <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">新建需求</span>
+      </a>
+      <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+      </a>
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar Nav -->
+    <aside class="flex-shrink-0 min-w-fit w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] py-4">
+      <nav class="flex flex-col">
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:cpu" class="text-base"></iconify-icon>
+          </div>
+          <span>自动化配置</span>
+        </a>
+        <a href="settings-review-rules.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
+          </div>
+          <span>审核规则</span>
+        </a>
+        <a href="settings-dev-environment.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:terminal" class="text-base"></iconify-icon>
+          </div>
+          <span>开发环境</span>
+        </a>
+        <a href="settings-model-management.html" class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#0D7C7C] border-l-2 border-[#0D7C7C] bg-[hsla(200,20%,98%,1)] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:brain" class="text-base"></iconify-icon>
+          </div>
+          <span>模型管理</span>
+        </a>
+        <a href="settings-ai-agent.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base"></iconify-icon>
+          </div>
+          <span>AI Agent配置</span>
+        </a>
+        <a href="settings-team-members.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:users" class="text-base"></iconify-icon>
+          </div>
+          <span>团队成员</span>
+        </a>
+        <a href="settings-notifications.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base"></iconify-icon>
+          </div>
+          <span>通知设置</span>
+        </a>
+        <a href="settings-integrations.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plug" class="text-base"></iconify-icon>
+          </div>
+          <span>集成配置</span>
+        </a>
+        <a href="settings-security.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:lock" class="text-base"></iconify-icon>
+          </div>
+          <span>安全与权限</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:credit-card" class="text-base"></iconify-icon>
+          </div>
+          <span>账单与订阅</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden overflow-y-auto flex flex-col px-8 py-6">
+
+      <!-- Page Title + Actions -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">模型管理</h1>
+        <div class="flex items-center gap-3">
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">保存更改</span>
+          </button>
+          <a href="settings.html" class="text-sm text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">恢复默认设置</a>
+        </div>
+      </div>
+
+      <!-- Built-in Models Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">内置模型</h3>
+          <p class="text-sm text-[#6B7680] mt-1">系统预置的基础模型，不可删除</p>
+        </div>
+
+        <!-- Claude Opus -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+                <iconify-icon icon="lucide:brain" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-[#1A1F24]">Claude Opus</span>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                    <iconify-icon icon="lucide:building-2" class="text-xs text-[#6B7680]"></iconify-icon>
+                    Anthropic
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">复杂推理</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">长文本</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">多步推理</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                已连接
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:pin" class="text-xs text-[#6B7680]"></iconify-icon>
+                内置
+              </div>
+              <button class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] hover:opacity-80 transition">
+                <iconify-icon icon="lucide:plug" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                测试连接
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Claude Sonnet -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+                <iconify-icon icon="lucide:brain" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-[#1A1F24]">Claude Sonnet</span>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                    <iconify-icon icon="lucide:building-2" class="text-xs text-[#6B7680]"></iconify-icon>
+                    Anthropic
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">平衡性能</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">快速输出</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">代码生成</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                已连接
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:pin" class="text-xs text-[#6B7680]"></iconify-icon>
+                内置
+              </div>
+              <button class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] hover:opacity-80 transition">
+                <iconify-icon icon="lucide:plug" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                测试连接
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GPT-4o -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+                <iconify-icon icon="lucide:sparkles" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-[#1A1F24]">GPT-4o</span>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                    <iconify-icon icon="lucide:building-2" class="text-xs text-[#6B7680]"></iconify-icon>
+                    OpenAI
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">多模态</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">快速推理</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">通用</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                已连接
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:pin" class="text-xs text-[#6B7680]"></iconify-icon>
+                内置
+              </div>
+              <button class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] hover:opacity-80 transition">
+                <iconify-icon icon="lucide:plug" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                测试连接
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gemini Pro -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+                <iconify-icon icon="lucide:diamond" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-[#1A1F24]">Gemini Pro</span>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                    <iconify-icon icon="lucide:building-2" class="text-xs text-[#6B7680]"></iconify-icon>
+                    Google
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">多模态</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">长上下文</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#9BA3AB]">
+                <iconify-icon icon="lucide:circle" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                未测试
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:pin" class="text-xs text-[#6B7680]"></iconify-icon>
+                内置
+              </div>
+              <button class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#0D7C7C] font-semibold hover:opacity-80 transition">
+                <iconify-icon icon="lucide:plug" class="text-xs"></iconify-icon>
+                测试连接
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DeepSeek -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+                <iconify-icon icon="lucide:server" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-[#1A1F24]">DeepSeek</span>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                    <iconify-icon icon="lucide:building-2" class="text-xs text-[#6B7680]"></iconify-icon>
+                    DeepSeek
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">代码生成</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">数学推理</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-full text-xs text-[#0D7C7C]">低成本</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                已连接
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:pin" class="text-xs text-[#6B7680]"></iconify-icon>
+                内置
+              </div>
+              <button class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] hover:opacity-80 transition">
+                <iconify-icon icon="lucide:plug" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                测试连接
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Models Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-semibold text-[#1A1F24]">自定义模型</h3>
+            <p class="text-sm text-[#6B7680] mt-1">添加自定义模型以扩展Agent可用的模型池</p>
+          </div>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">添加自定义模型</span>
+          </button>
+        </div>
+
+        <!-- Custom Model 1: Qwen (example of added model) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="flex items-center justify-center w-8 h-8 bg-[#5B7C92] rounded-lg">
+                <iconify-icon icon="lucide:cube" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                  <span class="text-sm font-semibold text-[#1A1F24]">Qwen-Max</span>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                    <iconify-icon icon="lucide:building-2" class="text-xs text-[#6B7680]"></iconify-icon>
+                    阿里云
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#5B7C92] rounded-full text-xs text-[#5B7C92]">中文优化</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#5B7C92] rounded-full text-xs text-[#5B7C92]">长文本</div>
+                  <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,20%,98%,1)] border border-[#5B7C92] rounded-full text-xs text-[#5B7C92]">代码生成</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                已连接
+              </div>
+              <button class="flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] hover:opacity-80 transition">
+                <iconify-icon icon="lucide:plug" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                测试连接
+              </button>
+              <button class="flex items-center justify-center w-6 h-6 rounded-full text-[#9BA3AB] hover:text-[#D93025] hover:bg-[#FDECEA] transition">
+                <iconify-icon icon="lucide:x" class="text-sm"></iconify-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Expandable Config -->
+          <div class="mt-3 space-y-3">
+            <!-- API端点 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">API端点</label>
+              <input type="text" value="https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-sm">
+            </div>
+            <!-- API密钥 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">API密钥</label>
+              <div class="flex items-center gap-2">
+                <input type="password" value="sk-xxxxx-hidden-key" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-sm">
+                <button class="flex items-center justify-center w-8 h-8 rounded-lg border border-[#E1E6EA] bg-white hover:opacity-80 transition">
+                  <iconify-icon icon="lucide:eye-off" class="text-sm text-[#6B7680]"></iconify-icon>
+                </button>
+              </div>
+            </div>
+            <!-- 最大上下文长度 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">最大上下文长度 (tokens)</label>
+              <input type="number" value="32768" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-sm">
+            </div>
+            <!-- 能力标签 -->
+            <div>
+              <label class="text-xs text-[#4A5259]">能力标签</label>
+              <div class="flex gap-2 mt-2 overflow-x-auto hide-scrollbar">
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">复杂推理</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">代码生成</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">多模态</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">快速输出</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">长文本</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">低成本</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">中文优化</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">数学推理</div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State: Add New Custom Model (blank card in edit mode) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4 border-2 border-dashed border-[#CBD3DA]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-lg">
+              <iconify-icon icon="lucide:cube" class="text-base text-[#9BA3AB]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#9BA3AB]">新模型配置</span>
+          </div>
+
+          <div class="space-y-3">
+            <!-- 模型名称 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">模型名称</label>
+              <input type="text" placeholder="输入模型名称，如: Llama-3-70B" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#0D7C7C] transition text-sm text-[#4A5259]">
+            </div>
+            <!-- 提供商 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">提供商 / 来源</label>
+              <input type="text" placeholder="输入提供商名称，如: Meta, 自托管" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#0D7C7C] transition text-sm text-[#4A5259]">
+            </div>
+            <!-- API端点 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">API端点</label>
+              <input type="text" placeholder="输入API URL，如: http://localhost:8000/v1/chat/completions" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#0D7C7C] transition text-sm text-[#4A5259]">
+            </div>
+            <!-- API密钥 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">API密钥</label>
+              <div class="flex items-center gap-2">
+                <input type="password" placeholder="输入API密钥" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#0D7C7C] transition text-sm text-[#4A5259]">
+                <button class="flex items-center justify-center w-8 h-8 rounded-lg border border-[#E1E6EA] bg-white hover:opacity-80 transition">
+                  <iconify-icon icon="lucide:eye-off" class="text-sm text-[#6B7680]"></iconify-icon>
+                </button>
+              </div>
+            </div>
+            <!-- 最大上下文长度 -->
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">最大上下文长度 (tokens)</label>
+              <input type="number" placeholder="8192" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#0D7C7C] transition text-sm text-[#4A5259]">
+            </div>
+            <!-- 能力标签 -->
+            <div>
+              <label class="text-xs text-[#4A5259]">能力标签</label>
+              <div class="flex gap-2 mt-2 overflow-x-auto hide-scrollbar">
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">复杂推理</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">代码生成</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">多模态</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">快速输出</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">长文本</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">低成本</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">中文优化</div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="checkbox" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1.5 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap text-xs">数学推理</div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-[#FEF6E8] border-t border-[#F59D0D] px-8 py-3 flex items-center justify-between">
+    <span class="text-sm text-[#F59D0D] font-semibold flex items-center gap-2">
+      <div class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:alert-circle" class="text-base text-[#F59D0D]"></iconify-icon>
+      </div>
+      您有未保存的更改
+    </span>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:x" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">取消</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">保存更改</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>需求管理 - AI DevOps Orchestrator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Header (Primary Nav) -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <div class="flex items-center justify-between w-full px-8">
+      <!-- Left Section -->
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="dashboard.html" class="text-sm text-[#4A5259] hover:text-[#0D7C7C]">工作流看板</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="requirements.html" class="text-sm font-semibold text-[#0D7C7C]">需求管理</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="knowledge-base.html" class="text-sm text-[#4A5259] hover:text-[#0D7C7C]">知识库</a>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="settings.html" class="text-sm text-[#4A5259] hover:text-[#0D7C7C]">系统设置</a>
+        </div>
+      </div>
+      <!-- Right Section -->
+      <div class="flex items-center gap-4">
+        <a href="notification-panel.html" class="relative flex items-center justify-center w-10 h-10">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+          </div>
+          <div class="absolute -top-1 -right-1 w-5 h-5 bg-[#D93025] rounded-full flex items-center justify-center">
+            <span class="text-xs text-white/95">3</span>
+          </div>
+        </a>
+        <div class="flex items-center gap-2">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-9 h-9 rounded-full">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4">
+            <iconify-icon icon="lucide:chevron-down" class="text-sm text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-12 py-6">
+
+      <!-- Page Title Area -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">需求管理</h1>
+        <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4">
+            <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
+          </div>
+          <span class="whitespace-nowrap">新建需求</span>
+        </a>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex items-center justify-between mb-6">
+        <!-- Filter Tags (peer/peer-checked pattern) -->
+        <div class="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+          <label>
+            <input type="radio" name="statusFilter" class="sr-only peer" checked>
+            <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap">全部</div>
+          </label>
+          <label>
+            <input type="radio" name="statusFilter" class="sr-only peer">
+            <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap">进行中</div>
+          </label>
+          <label>
+            <input type="radio" name="statusFilter" class="sr-only peer">
+            <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap">待审核</div>
+          </label>
+          <label>
+            <input type="radio" name="statusFilter" class="sr-only peer">
+            <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap">已完成</div>
+          </label>
+          <label>
+            <input type="radio" name="statusFilter" class="sr-only peer">
+            <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap">已归档</div>
+          </label>
+        </div>
+        <!-- Sort Dropdown + Search -->
+        <div class="flex items-center gap-3">
+          <!-- Sort Dropdown -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4">
+              <iconify-icon icon="lucide:arrow-up-down" class="text-sm text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">最新创建</span>
+          </div>
+          <!-- Search -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4">
+              <iconify-icon icon="lucide:search" class="text-sm text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#9BA3AB] whitespace-nowrap">搜索标题或ID</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requirement Cards List -->
+      <div class="flex flex-col gap-4">
+
+        <!-- Card 1: REQ-0012 -->
+        <a href="requirement-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 cursor-pointer transition hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] no-underline">
+          <div class="flex items-start justify-between">
+            <div class="flex flex-col gap-3 flex-1">
+              <div class="flex items-center gap-3">
+                  <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0012</span>
+                  <span class="text-lg font-semibold text-[#1A1F24]">用户注册手机号验证</span>
+                <span class="bg-[#E8F0FE] text-[#3367D6] px-3 py-1 rounded-full text-xs font-semibold">需求分析</span>
+                <span class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold">高</span>
+              </div>
+              <p class="text-sm text-[#6B7680] line-clamp-2">用户注册流程中需要增加手机号短信验证码验证功能，确保用户身份真实性，减少虚假账号注册。支持中国大陆手机号格式...</p>
+              <div class="flex items-center gap-4 text-sm text-[#9BA3AB]">
+                <span class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-6 h-6 rounded-full">
+                  Sarah
+                </span>
+                <span>创建于 2026-06-04</span>
+                <span>更新于 2小时前</span>
+                <span class="flex items-center gap-1">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:tasks" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                  </div>
+                  0个任务
+                </span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 ml-4">
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:eye" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:pencil" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+              <button class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:archive" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </button>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 2: REQ-0008 -->
+        <a href="requirement-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 cursor-pointer transition hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] no-underline">
+          <div class="flex items-start justify-between">
+            <div class="flex flex-col gap-3 flex-1">
+              <div class="flex items-center gap-3">
+                  <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0008</span>
+                  <span class="text-lg font-semibold text-[#1A1F24]">多语言支持模块</span>
+                <span class="bg-[#FEF6E8] text-[#F59D0D] px-3 py-1 rounded-full text-xs font-semibold">架构设计</span>
+                <span class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold">高</span>
+              </div>
+              <p class="text-sm text-[#6B7680]">系统需要支持中英文双语界面切换，未来可能扩展到更多语言。需要设计可扩展的国际化架构，支持动态语言包加载和翻译管理...</p>
+              <div class="flex items-center gap-4 text-sm text-[#9BA3AB]">
+                <span class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-6 h-6 rounded-full">
+                  Alex
+                </span>
+                <span>创建于 2026-06-02</span>
+                <span>更新于 6小时前</span>
+                <span class="flex items-center gap-1">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:tasks" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                  </div>
+                  3个任务
+                </span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 ml-4">
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:eye" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:pencil" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3: REQ-0007 -->
+        <a href="requirement-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 cursor-pointer transition hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] no-underline">
+          <div class="flex items-start justify-between">
+            <div class="flex flex-col gap-3 flex-1">
+              <div class="flex items-center gap-3">
+                  <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0007</span>
+                  <span class="text-lg font-semibold text-[#1A1F24]">短信验证码功能</span>
+                <span class="bg-[#E8F7F0] text-[#0F8B5D] px-3 py-1 rounded-full text-xs font-semibold">开发中</span>
+                <span class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold">高</span>
+              </div>
+              <p class="text-sm text-[#6B7680]">实现短信验证码发送、验证和过期管理功能，集成第三方短信服务商API，使用Redis存储验证码并设置5分钟过期时间...</p>
+              <div class="flex items-center gap-4 text-sm text-[#9BA3AB]">
+                <span class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-6 h-6 rounded-full">
+                  Sarah
+                </span>
+                <span>创建于 2026-05-30</span>
+                <span>更新于 1天前</span>
+                <span class="flex items-center gap-1">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:tasks" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                  </div>
+                  4个任务
+                </span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 ml-4">
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:eye" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 4: REQ-0005 -->
+        <a href="requirement-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 cursor-pointer transition hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] no-underline">
+          <div class="flex items-start justify-between">
+            <div class="flex flex-col gap-3 flex-1">
+              <div class="flex items-center gap-3">
+                  <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0005</span>
+                  <span class="text-lg font-semibold text-[#1A1F24]">用户权限管理优化</span>
+                <span class="bg-[#FEF6E8] text-[#F59D0D] px-3 py-1 rounded-full text-xs font-semibold">代码审查</span>
+                <span class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold">高</span>
+              </div>
+              <p class="text-sm text-[#6B7680]">优化现有权限管理系统，支持RBAC模型，增加角色继承和权限组功能，提供更灵活的权限配置方案...</p>
+              <div class="flex items-center gap-4 text-sm text-[#9BA3AB]">
+                <span class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-6 h-6 rounded-full">
+                  Alex
+                </span>
+                <span>创建于 2026-05-28</span>
+                <span>更新于 3天前</span>
+                <span class="flex items-center gap-1">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:tasks" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                  </div>
+                  2个任务
+                </span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 ml-4">
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:eye" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 5: REQ-0003 (Completed - dimmed) -->
+        <a href="requirement-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 cursor-pointer transition hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] opacity-70 no-underline">
+          <div class="flex items-start justify-between">
+            <div class="flex flex-col gap-3 flex-1">
+              <div class="flex items-center gap-3">
+                  <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0003</span>
+                  <span class="text-lg font-semibold text-[#1A1F24]">支付流程重构</span>
+                <span class="bg-[#E8F7F0] text-[#0F8B5D] px-3 py-1 rounded-full text-xs font-semibold">已完成</span>
+                <span class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold">高</span>
+              </div>
+              <p class="text-sm text-[#6B7680]">重构支付流程，将原有的单一支付入口改为多渠道支付，支持微信支付、支付宝和银行卡支付三种方式...</p>
+              <div class="flex items-center gap-4 text-sm text-[#9BA3AB]">
+                <span class="flex items-center gap-2">
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-6 h-6 rounded-full">
+                  Alex
+                </span>
+                <span>创建于 2026-05-20</span>
+                <span class="flex items-center gap-1">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:tasks" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                  </div>
+                  5个任务
+                </span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 ml-4">
+              <a href="requirement-detail.html" class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:eye" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </a>
+              <button class="flex items-center justify-center w-10 h-10 rounded-full transition hover:opacity-80 bg-white border border-[#E1E6EA]">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                  <iconify-icon icon="lucide:archive" class="text-sm text-[#4A5259]"></iconify-icon>
+                </div>
+              </button>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center gap-2 mt-8">
+        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white text-[#4A5259] cursor-pointer transition hover:opacity-80">
+          <iconify-icon icon="lucide:chevron-left" class="text-sm"></iconify-icon>
+        </div>
+        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[#0D7C7C] text-white/95 cursor-pointer">1</div>
+        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white text-[#4A5259] cursor-pointer transition hover:opacity-80">2</div>
+        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white text-[#4A5259] cursor-pointer transition hover:opacity-80">3</div>
+        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-white text-[#4A5259] cursor-pointer transition hover:opacity-80">
+          <iconify-icon icon="lucide:chevron-right" class="text-sm"></iconify-icon>
+        </div>
+        <span class="text-sm text-[#6B7680] ml-4">共 15 条记录</span>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>

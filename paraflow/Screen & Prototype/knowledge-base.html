@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>知识库 - AI DevOps Orchestrator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <div class="flex items-center justify-between w-full px-8">
+      <!-- Nav Left -->
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-base font-semibold text-[#1A1F24]">AI DevOps</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="dashboard.html" class="text-sm text-[#4A5259] cursor-pointer px-3 py-2 rounded-full transition hover:bg-[hsla(200,15%,92%,1)]">工作流看板</a>
+          <a href="requirements.html" class="text-sm text-[#4A5259] cursor-pointer px-3 py-2 rounded-full transition hover:bg-[hsla(200,15%,92%,1)]">需求管理</a>
+          <a href="knowledge-base.html" class="text-sm text-[#0D7C7C] font-semibold cursor-pointer px-3 py-2 rounded-full bg-[hsla(200,20%,92%,1)]">知识库</a>
+          <a href="settings.html" class="text-sm text-[#4A5259] cursor-pointer px-3 py-2 rounded-full transition hover:bg-[hsla(200,15%,92%,1)]">系统设置</a>
+        </div>
+      </div>
+      <!-- Nav Right -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+          </div>
+          <span>搜索...</span>
+        </div>
+        <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+          </div>
+          <span class="whitespace-nowrap">新建需求</span>
+        </a>
+        <a href="notification-panel.html" class="relative flex items-center justify-center w-10 h-10 cursor-pointer">
+          <iconify-icon icon="lucide:bell" class="text-xl text-[#4A5259]"></iconify-icon>
+          <div class="absolute -top-1 -right-1 w-5 h-5 bg-[#D93025] rounded-full flex items-center justify-center text-white text-xs font-semibold">3</div>
+        </a>
+        <div class="flex items-center gap-2 cursor-pointer">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-9 h-9 rounded-full">
+          <iconify-icon icon="lucide:chevron-down" class="text-sm text-[#6B7680] w-4 h-4"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar -->
+    <aside class="flex-shrink-0 w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] flex flex-col p-4 gap-1 overflow-y-auto">
+      <!-- Knowledge Category Navigation -->
+      <div class="flex flex-col gap-1">
+        <!-- Active Item: 全部知识条目 -->
+        <a href="knowledge-base.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[hsla(200,20%,92%,1)] text-[#0D7C7C] font-semibold cursor-pointer relative no-underline">
+          <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-5 bg-[#0D7C7C] rounded-full"></div>
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:library" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">全部知识条目</span>
+        </a>
+        <a href="knowledge-requirement-docs.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4A5259] cursor-pointer transition hover:bg-[hsla(200,15%,92%,1)] no-underline">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:file-text" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">需求文档</span>
+        </a>
+        <a href="knowledge-architecture.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4A5259] cursor-pointer transition hover:bg-[hsla(200,15%,92%,1)] no-underline">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:blocks" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">架构方案</span>
+        </a>
+        <a href="knowledge-code-patterns.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4A5259] cursor-pointer transition hover:bg-[hsla(200,15%,92%,1)] no-underline">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:code-2" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">代码模式</span>
+        </a>
+        <a href="knowledge-solutions.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4A5259] cursor-pointer transition hover:bg-[hsla(200,15%,92%,1)] no-underline">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:puzzle" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">问题解决方案</span>
+        </a>
+        <a href="knowledge-deploy-config.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4A5259] cursor-pointer transition hover:bg-[hsla(200,15%,92%,1)] no-underline">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:server" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">部署配置</span>
+        </a>
+        <a href="knowledge-favorites.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4A5259] cursor-pointer transition hover:bg-[hsla(200,15%,92%,1)] no-underline">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:star" class="text-base"></iconify-icon>
+          </div>
+          <span class="text-sm whitespace-nowrap">我的收藏</span>
+        </a>
+      </div>
+
+      </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Page Title + Stats Row -->
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-[#1A1F24]">知识库</h1>
+          <div class="flex items-center gap-4 mt-1 text-sm text-[#6B7680]">
+            <span>总条目数 <span class="text-[#1A1F24] font-semibold">156</span></span>
+            <span class="text-[#E1E6EA]">|</span>
+            <span>本月新增 <span class="text-[#0D7C7C] font-semibold">12</span></span>
+            <span class="text-[#E1E6EA]">|</span>
+            <span>引用次数 <span class="text-[#1A1F24] font-semibold">892</span></span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <!-- Search Box -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full" style="width:280px">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:search" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#6B7680]">全文搜索知识库...</span>
+            <button class="text-xs text-[#0D7C7C] ml-auto whitespace-nowrap cursor-pointer">高级筛选</button>
+          </div>
+          <!-- View Toggle -->
+          <div class="flex items-center gap-2 bg-white border border-[#E1E6EA] rounded-full px-3 py-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer">
+              <iconify-icon icon="lucide:layout-grid" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#0D7C7C] font-semibold whitespace-nowrap">卡片</span>
+            <span class="text-sm text-[#E1E6EA]">|</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer">
+              <iconify-icon icon="lucide:list" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#6B7680] whitespace-nowrap">列表</span>
+          </div>
+          <!-- Sort Dropdown -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:arrow-up-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">最新创建</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Filter Panel -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-3 mb-5">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-semibold text-[#1A1F24]">高级筛选</span>
+          <button class="text-xs text-[#0D7C7C] cursor-pointer whitespace-nowrap">重置筛选</button>
+        </div>
+        <div class="flex items-center gap-3">
+          <!-- Category Filter -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:filter" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">类别</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+          <!-- Quality Filter -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:star" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">质量评分</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+          <!-- Date Range -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:calendar" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">时间范围</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+          <!-- Tech Tag Filter -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:tag" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">技术标签</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+          <!-- Knowledge Type Multi-Select -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:layers" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">知识类型</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+          <!-- Creator Filter -->
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:user" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#4A5259] whitespace-nowrap">创建者</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+          <!-- Apply Filters Button -->
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:check" class="text-base"></iconify-icon>
+            </div>
+            <span class="text-sm whitespace-nowrap">应用筛选</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Knowledge Cards Grid (3 columns) -->
+      <div class="grid grid-cols-3 gap-5">
+
+        <!-- AI Recommended Card -->
+        <a href="knowledge-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 relative no-underline hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition">
+          <!-- AI Badge -->
+          <div class="absolute top-3 right-3 bg-[#0D7C7C] text-white/95 text-xs px-3 py-1 rounded-full flex items-center gap-1">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:bot" class="text-xs"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">相似知识推荐</span>
+          </div>
+          <!-- AI Recommendation Label -->
+          <div class="flex items-center gap-1 text-xs text-[#0D7C7C] bg-[hsla(200,20%,92%,1)] rounded-full px-2.5 py-1">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4">
+              <iconify-icon icon="lucide:bot" class="text-xs"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap font-semibold">AI推荐</span>
+          </div>
+          <!-- Type Icon + Label -->
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#E8F0FE] rounded-lg flex items-center justify-center">
+              <iconify-icon icon="lucide:blocks" class="text-sm text-[#3367D6]"></iconify-icon>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-[#E8F0FE] text-[#3367D6] font-semibold whitespace-nowrap">架构方案</span>
+          </div>
+          <!-- Title -->
+          <h3 class="text-base font-semibold text-[#1A1F24]">短信服务架构设计模式</h3>
+          <!-- Summary -->
+          <p class="text-sm text-[#6B7680] line-clamp-3">基于Redis缓存的验证码存储架构,包含发送频率限制、过期管理、加密存储等核心设计要点,适用于短信验证码类功能开发。</p>
+          <!-- Tech Tags -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">Redis</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">Node.js</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">短信API</span>
+          </div>
+          <!-- Citation + Quality -->
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+            <span>引用 28次</span>
+            <span class="flex items-center gap-1 text-[#0F8B5D]">
+              <iconify-icon icon="lucide:star" class="text-xs"></iconify-icon>
+              质量 4.5
+            </span>
+          </div>
+          <!-- Source + Quick Actions -->
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[#9BA3AB]">来源 REQ-0007 · 2026-06-01</span>
+            <div class="flex items-center gap-2">
+              <a href="knowledge-detail.html" class="flex items-center gap-2 px-3 py-1.5 text-xs text-[#0D7C7C] rounded-full transition hover:bg-[hsla(200,20%,92%,1)] cursor-pointer">
+                <span class="whitespace-nowrap">查看详情</span>
+              </a>
+              <iconify-icon icon="lucide:star" class="text-sm text-[#9BA3AB] cursor-pointer"></iconify-icon>
+            </div>
+          </div>
+          <!-- AI Recommendation Reason -->
+          <div class="text-xs text-[#0D7C7C] flex items-center gap-1">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:lightbulb" class="text-xs"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">推荐理由: 与当前需求REQ-0012高度相关</span>
+          </div>
+        </a>
+
+        <!-- Card 2 - 代码模式 -->
+        <a href="knowledge-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 no-underline hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#E8F7F0] rounded-lg flex items-center justify-center">
+              <iconify-icon icon="lucide:code-2" class="text-sm text-[#0F8B5D]"></iconify-icon>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-[#E8F7F0] text-[#0F8B5D] font-semibold whitespace-nowrap">代码模式</span>
+          </div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">React表单验证Hook模式</h3>
+          <p class="text-sm text-[#6B7680] line-clamp-3">自定义React Hook用于手机号格式校验和验证码输入,包含防抖提交、错误状态管理、重发倒计时等通用逻辑封装。</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">React</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">TypeScript</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+            <span>引用 15次</span>
+            <span class="flex items-center gap-1 text-[#0F8B5D]">
+              <iconify-icon icon="lucide:star" class="text-xs"></iconify-icon>
+              质量 4.2
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[#9BA3AB]">来源 REQ-0007 · 2026-05-31</span>
+            <div class="flex items-center gap-2">
+              <a href="knowledge-detail.html" class="flex items-center gap-2 px-3 py-1.5 text-xs text-[#0D7C7C] rounded-full transition hover:bg-[hsla(200,20%,92%,1)] cursor-pointer">
+                <span class="whitespace-nowrap">查看详情</span>
+              </a>
+              <iconify-icon icon="lucide:star" class="text-sm text-[#0D7C7C] cursor-pointer"></iconify-icon>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3 - 问题解决方案 -->
+        <a href="knowledge-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 no-underline hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#FEF6E8] rounded-lg flex items-center justify-center">
+              <iconify-icon icon="lucide:puzzle" class="text-sm text-[#F59D0D]"></iconify-icon>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-[#FEF6E8] text-[#F59D0D] font-semibold whitespace-nowrap">问题解决方案</span>
+          </div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">Redis连接池超时问题</h3>
+          <p class="text-sm text-[#6B7680] line-clamp-3">高并发场景下Redis连接池耗尽导致验证码存储超时,解决方案: 增加连接池上限、实现连接复用、添加降级策略。</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">Redis</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">性能</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+            <span>引用 42次</span>
+            <span class="flex items-center gap-1 text-[#0F8B5D]">
+              <iconify-icon icon="lucide:star" class="text-xs"></iconify-icon>
+              质量 4.8
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[#9BA3AB]">来源 REQ-0005 · 2026-05-25</span>
+            <div class="flex items-center gap-2">
+              <a href="knowledge-detail.html" class="flex items-center gap-2 px-3 py-1.5 text-xs text-[#0D7C7C] rounded-full transition hover:bg-[hsla(200,20%,92%,1)] cursor-pointer">
+                <span class="whitespace-nowrap">查看详情</span>
+              </a>
+              <iconify-icon icon="lucide:star" class="text-sm text-[#0D7C7C] cursor-pointer"></iconify-icon>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 4 - 部署配置 -->
+        <a href="knowledge-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 no-underline hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#E8F0FE] rounded-lg flex items-center justify-center">
+              <iconify-icon icon="lucide:server" class="text-sm text-[#3367D6]"></iconify-icon>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-[#E8F0FE] text-[#3367D6] font-semibold whitespace-nowrap">部署配置</span>
+          </div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">Node.js生产环境部署模板</h3>
+          <p class="text-sm text-[#6B7680] line-clamp-3">标准化的Node.js服务部署配置模板,包含Dockerfile、K8s部署YAML、健康检查配置、日志收集和监控设置。</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">DevOps</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">Docker</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+            <span>引用 67次</span>
+            <span class="flex items-center gap-1 text-[#0F8B5D]">
+              <iconify-icon icon="lucide:star" class="text-xs"></iconify-icon>
+              质量 4.9
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[#9BA3AB]">来源 REQ-0003 · 2026-05-20</span>
+            <div class="flex items-center gap-2">
+              <a href="knowledge-detail.html" class="flex items-center gap-2 px-3 py-1.5 text-xs text-[#0D7C7C] rounded-full transition hover:bg-[hsla(200,20%,92%,1)] cursor-pointer">
+                <span class="whitespace-nowrap">查看详情</span>
+              </a>
+              <iconify-icon icon="lucide:star" class="text-sm text-[#9BA3AB] cursor-pointer"></iconify-icon>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 5 - 需求文档 -->
+        <a href="knowledge-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 no-underline hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[hsla(200,15%,95%,1)] rounded-lg flex items-center justify-center">
+              <iconify-icon icon="lucide:file-text" class="text-sm text-[#4A5259]"></iconify-icon>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-[hsla(200,15%,95%,1)] text-[#4A5259] font-semibold whitespace-nowrap">需求文档</span>
+          </div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">支付流程重构需求分析</h3>
+          <p class="text-sm text-[#6B7680] line-clamp-3">多渠道支付重构的完整需求分析文档,涵盖业务目标、用户场景、功能范围和验收标准,作为后续类似支付需求的参考。</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">支付</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">业务</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+            <span>引用 33次</span>
+            <span class="flex items-center gap-1 text-[#0F8B5D]">
+              <iconify-icon icon="lucide:star" class="text-xs"></iconify-icon>
+              质量 4.3
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[#9BA3AB]">来源 REQ-0003 · 2026-05-18</span>
+            <div class="flex items-center gap-2">
+              <a href="knowledge-detail.html" class="flex items-center gap-2 px-3 py-1.5 text-xs text-[#0D7C7C] rounded-full transition hover:bg-[hsla(200,20%,92%,1)] cursor-pointer">
+                <span class="whitespace-nowrap">查看详情</span>
+              </a>
+              <iconify-icon icon="lucide:star" class="text-sm text-[#9BA3AB] cursor-pointer"></iconify-icon>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 6 - 代码模式 -->
+        <a href="knowledge-detail.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 no-underline hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#E8F7F0] rounded-lg flex items-center justify-center">
+              <iconify-icon icon="lucide:code-2" class="text-sm text-[#0F8B5D]"></iconify-icon>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-[#E8F7F0] text-[#0F8B5D] font-semibold whitespace-nowrap">代码模式</span>
+          </div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">RBAC权限管理实现模式</h3>
+          <p class="text-sm text-[#6B7680] line-clamp-3">基于角色的访问控制(RBAC)完整实现,包含角色继承、权限组、动态权限加载等核心代码模式,适用于权限管理功能开发。</p>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">安全</span>
+            <span class="text-xs bg-[hsla(200,15%,95%,1)] rounded-full px-2.5 py-1 text-[#4A5259] whitespace-nowrap">Node.js</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+            <span>引用 19次</span>
+            <span class="flex items-center gap-1 text-[#0F8B5D]">
+              <iconify-icon icon="lucide:star" class="text-xs"></iconify-icon>
+              质量 4.1
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-[#9BA3AB]">来源 REQ-0005 · 2026-05-28</span>
+            <div class="flex items-center gap-2">
+              <a href="knowledge-detail.html" class="flex items-center gap-2 px-3 py-1.5 text-xs text-[#0D7C7C] rounded-full transition hover:bg-[hsla(200,20%,92%,1)] cursor-pointer">
+                <span class="whitespace-nowrap">查看详情</span>
+              </a>
+              <iconify-icon icon="lucide:star" class="text-sm text-[#9BA3AB] cursor-pointer"></iconify-icon>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex items-center justify-center gap-2 mt-8">
+        <!-- Prev -->
+        <button class="flex items-center justify-center w-9 h-9 rounded-full border border-[#E1E6EA] text-[#6B7680] transition hover:bg-[hsla(200,15%,92%,1)] cursor-pointer">
+          <iconify-icon icon="lucide:chevron-left" class="text-sm"></iconify-icon>
+        </button>
+        <!-- Page 1 - Active -->
+        <button class="flex items-center justify-center w-9 h-9 rounded-full bg-[#0D7C7C] text-white/95 text-sm font-semibold cursor-pointer">1</button>
+        <!-- Page 2 -->
+        <button class="flex items-center justify-center w-9 h-9 rounded-full border border-[#E1E6EA] text-[#4A5259] text-sm transition hover:bg-[hsla(200,15%,92%,1)] cursor-pointer">2</button>
+        <!-- Page 3 -->
+        <button class="flex items-center justify-center w-9 h-9 rounded-full border border-[#E1E6EA] text-[#4A5259] text-sm transition hover:bg-[hsla(200,15%,92%,1)] cursor-pointer">3</button>
+        <!-- Ellipsis -->
+        <span class="text-sm text-[#9BA3AB] px-2">...</span>
+        <!-- Page 11 -->
+        <button class="flex items-center justify-center w-9 h-9 rounded-full border border-[#E1E6EA] text-[#4A5259] text-sm transition hover:bg-[hsla(200,15%,92%,1)] cursor-pointer">11</button>
+        <!-- Next -->
+        <button class="flex items-center justify-center w-9 h-9 rounded-full border border-[#E1E6EA] text-[#6B7680] transition hover:bg-[hsla(200,15%,92%,1)] cursor-pointer">
+          <iconify-icon icon="lucide:chevron-right" class="text-sm"></iconify-icon>
+        </button>
+        <span class="text-sm text-[#6B7680] ml-4 whitespace-nowrap">共 156 条记录</span>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>

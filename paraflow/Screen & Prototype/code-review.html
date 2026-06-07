@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>代码审核 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <div class="flex items-center justify-between w-full px-8">
+      <!-- Nav Left -->
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">AI DevOps</span>
+        </div>
+        <ul class="flex items-center gap-6 text-sm text-[#4A5259]">
+          <li><a href="dashboard.html" class="cursor-pointer hover:text-[#0D7C7C] text-[#0D7C7C] font-semibold">工作流看板</a></li>
+          <li><a href="requirements.html" class="cursor-pointer hover:text-[#0D7C7C]">需求管理</a></li>
+          <li><a href="knowledge-base.html" class="cursor-pointer hover:text-[#0D7C7C]">知识库</a></li>
+          <li><a href="settings.html" class="cursor-pointer hover:text-[#0D7C7C]">系统设置</a></li>
+        </ul>
+      </div>
+      <!-- Nav Right -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 px-3 py-1.5 bg-[hsla(200,15%,95%,1)] rounded-full text-sm text-[#6B7680]">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+          </div>
+          <span>搜索...</span>
+        </div>
+        <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+          </div>
+          <span class="whitespace-nowrap">新建需求</span>
+        </a>
+        <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer">
+          <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+        </a>
+        <div class="relative flex items-center justify-center">
+          <div class="absolute -top-1 -right-1 w-4 h-4 bg-[#D93025] rounded-full flex items-center justify-center text-xs text-white font-semibold">1</div>
+        </div>
+        <div class="flex items-center gap-1 cursor-pointer">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Three-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left: File Tree -->
+    <aside class="flex-shrink-0 min-w-fit w-[200px] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 m-3 overflow-y-auto">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:folder-git-2" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-sm font-semibold text-[#1A1F24]">变更文件</span>
+      </div>
+      <!-- Filter -->
+      <div class="flex items-center gap-2">
+        <span class="px-3 py-1 text-xs bg-[#0D7C7C] text-white/95 rounded-full cursor-pointer">全部</span>
+        <span class="px-3 py-1 text-xs bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full cursor-pointer hover:bg-[#0D7C7C] hover:text-white/95 transition">仅问题文件</span>
+      </div>
+      <!-- File List -->
+      <div class="flex flex-col gap-2">
+        <!-- Added file -->
+        <div class="flex items-center gap-2 px-3 py-2 bg-[hsla(200,15%,95%,1)] rounded-lg cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:file-plus" class="text-base text-[#0F8B5D]"></iconify-icon>
+          </div>
+          <span class="text-sm text-[#1A1F24] truncate">verify.controller.ts</span>
+          <span class="text-xs text-[#0F8B5D] whitespace-nowrap">+85</span>
+        </div>
+        <!-- Modified file -->
+        <div class="flex items-center gap-2 px-3 py-2 bg-[hsla(200,15%,95%,1)] rounded-lg cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:file-pen" class="text-base text-[#F59D0D]"></iconify-icon>
+          </div>
+          <span class="text-sm text-[#1A1F24] truncate">verify.service.ts</span>
+          <span class="text-xs text-[#F59D0D] whitespace-nowrap">+32 -8</span>
+        </div>
+        <!-- Added file with issue (border-l-2 red) -->
+        <div class="flex items-center gap-2 px-3 py-2 bg-[hsla(200,15%,95%,1)] rounded-lg cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition border-l-2 border-[#D93025]">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:file-plus" class="text-base text-[#0F8B5D]"></iconify-icon>
+          </div>
+          <span class="text-sm text-[#1A1F24] truncate">redis.store.ts</span>
+          <span class="text-xs text-[#0F8B5D] whitespace-nowrap">+45</span>
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:alert-circle" class="text-base text-[#D93025]"></iconify-icon>
+          </div>
+        </div>
+        <!-- Modified file -->
+        <div class="flex items-center gap-2 px-3 py-2 bg-[hsla(200,15%,95%,1)] rounded-lg cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:file-pen" class="text-base text-[#F59D0D]"></iconify-icon>
+          </div>
+          <span class="text-sm text-[#1A1F24] truncate">app.module.ts</span>
+          <span class="text-xs text-[#F59D0D] whitespace-nowrap">+5 -2</span>
+        </div>
+        <!-- Deleted file -->
+        <div class="flex items-center gap-2 px-3 py-2 bg-[hsla(200,15%,95%,1)] rounded-lg cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:file-minus" class="text-base text-[#D93025]"></iconify-icon>
+          </div>
+          <span class="text-sm text-[#1A1F24] truncate">old.verify.ts</span>
+          <span class="text-xs text-[#D93025] whitespace-nowrap">-60</span>
+        </div>
+      </div>
+      <!-- Stats -->
+      <div class="flex items-center justify-between text-xs text-[#6B7680] pt-2">
+        <span>5 文件变更</span>
+        <span>+167 -70</span>
+      </div>
+    </aside>
+
+    <!-- Center: Code Diff View -->
+    <main class="flex-1 overflow-x-hidden flex flex-col m-3 gap-3">
+
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 text-sm">
+        <a href="dashboard.html" class="text-[#0D7C7C] hover:opacity-80">工作流看板</a>
+        <span class="text-[#6B7680]">/</span>
+        <span class="text-[#4A5259]">代码审核</span>
+        <span class="text-[#6B7680]">/</span>
+        <span class="text-[#1A1F24] font-semibold">TASK-007-A</span>
+      </div>
+
+      <!-- Review Header Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-semibold text-[#0D7C7C]">TASK-007-A</span>
+            <span class="text-base font-semibold text-[#1A1F24]">短信验证码API接口</span>
+            <span class="px-3 py-1 text-xs font-semibold bg-[#FEF6E8] text-[#F59D0D] rounded-full">需要修改</span>
+          </div>
+          <div class="flex items-center gap-3 text-sm text-[#6B7680]">
+            <a href="requirement-detail.html" class="text-[#0D7C7C] cursor-pointer hover:opacity-80">REQ-0007</a>
+            <span>· 后端开发Agent</span>
+            <span>· 提交于 2026-06-05 16:00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Diff Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col overflow-hidden flex-1 min-h-0">
+        <!-- File Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-[hsla(200,15%,96%,1)] border-b border-[hsla(200,15%,95%,1)]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:file-code" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">src/verify/redis.store.ts</span>
+            <span class="px-3 py-1 text-xs font-semibold bg-[#FDECEA] text-[#D93025] rounded-full">有问题</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full transition hover:opacity-80 text-sm">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:chevron-left" class="text-base"></iconify-icon>
+              </div>
+              <span class="whitespace-nowrap">上一文件</span>
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full transition hover:opacity-80 text-sm">
+              <span class="whitespace-nowrap">下一文件</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:chevron-right" class="text-base"></iconify-icon>
+              </div>
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 text-sm">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:columns" class="text-base"></iconify-icon>
+              </div>
+              <span class="whitespace-nowrap">并排对比</span>
+            </button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full transition hover:opacity-80 text-sm">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:merge" class="text-base"></iconify-icon>
+              </div>
+              <span class="whitespace-nowrap">统一视图</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Diff Content -->
+        <div class="flex-1 overflow-y-auto p-5 code-font text-sm leading-[1.8]">
+          <div class="flex flex-col">
+            <!-- Normal line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">1</span>
+              <span class="text-[#4A5259]">import { RedisClient } from '../config/redis.config';</span>
+            </div>
+            <!-- Normal line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">2</span>
+              <span class="text-[#4A5259]">import { generateCode } from '../utils/code-generator';</span>
+            </div>
+            <!-- Added line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+3</span>
+              <span class="text-[#0F8B5D]">export class RedisVerifyStore {</span>
+            </div>
+            <!-- Added line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+4</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;private readonly EXPIRY_SECONDS = 300; // 5 minutes</span>
+            </div>
+            <!-- Problem line with inline annotation -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#FDECEA] relative">
+              <span class="text-xs text-[#D93025] w-8 text-right shrink-0">+5</span>
+              <span class="text-[#D93025]">&nbsp;&nbsp;async storeCode(phone: string, code: string) {</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5 absolute right-4 cursor-pointer">
+                <iconify-icon icon="lucide:alert-circle" class="text-base text-[#D93025]"></iconify-icon>
+              </div>
+            </div>
+            <!-- Annotation popup (severe) -->
+            <div class="bg-[#FDECEA] border border-[#D93025] rounded-lg px-3 py-2 mx-4 mb-1">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:alert-triangle" class="text-base text-[#D93025]"></iconify-icon>
+                </div>
+                <span class="text-sm font-semibold text-[#D93025]">严重问题: 验证码未加密存储</span>
+              </div>
+              <p class="text-xs text-[#6B7680]">验证码直接以明文存储在Redis中,存在安全风险。建议使用AES加密后再存储。</p>
+              <div class="flex items-center gap-2 mt-2">
+                <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 text-xs">
+                  <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                    <iconify-icon icon="lucide:wrench" class="text-base"></iconify-icon>
+                  </div>
+                  <span class="whitespace-nowrap">修复建议</span>
+                </button>
+                <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#0D7C7C] rounded-full transition hover:opacity-80 text-xs">
+                  <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                    <iconify-icon icon="lucide:message-circle" class="text-base"></iconify-icon>
+                  </div>
+                  <span class="whitespace-nowrap">添加评论</span>
+                </button>
+              </div>
+            </div>
+            <!-- Added line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+6</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;const key = `verify:${phone}`;</span>
+            </div>
+            <!-- Added line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+7</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;await this.redis.set(key, code, 'EX', this.EXPIRY_SECONDS);</span>
+            </div>
+            <!-- Added line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+8</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;}</span>
+            </div>
+            <!-- Warning line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#FEF6E8] relative">
+              <span class="text-xs text-[#F59D0D] w-8 text-right shrink-0">+9</span>
+              <span class="text-[#F59D0D]">&nbsp;&nbsp;async verifyCode(phone: string, code: string) {</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5 absolute right-4 cursor-pointer">
+                <iconify-icon icon="lucide:alert-triangle" class="text-base text-[#F59D0D]"></iconify-icon>
+              </div>
+            </div>
+            <!-- Annotation popup (warning) -->
+            <div class="bg-[#FEF6E8] border border-[#F59D0D] rounded-lg px-3 py-2 mx-4 mb-1">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:alert-triangle" class="text-base text-[#F59D0D]"></iconify-icon>
+                </div>
+                <span class="text-sm font-semibold text-[#F59D0D]">警告: 验证码比对未使用加密比较</span>
+              </div>
+              <p class="text-xs text-[#6B7680]">直接比较验证码可能受到时序攻击。建议使用恒定时间比较函数。</p>
+              <div class="flex items-center gap-2 mt-2">
+                <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 text-xs">
+                  <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                    <iconify-icon icon="lucide:wrench" class="text-base"></iconify-icon>
+                  </div>
+                  <span class="whitespace-nowrap">修复建议</span>
+                </button>
+                <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#0D7C7C] rounded-full transition hover:opacity-80 text-xs">
+                  <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                    <iconify-icon icon="lucide:message-circle" class="text-base"></iconify-icon>
+                  </div>
+                  <span class="whitespace-nowrap">添加评论</span>
+                </button>
+              </div>
+            </div>
+            <!-- Added lines -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+10</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;const key = `verify:${phone}`;</span>
+            </div>
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+11</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;const stored = await this.redis.get(key);</span>
+            </div>
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+12</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;return stored === code;</span>
+            </div>
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+13</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;}</span>
+            </div>
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">+14</span>
+              <span class="text-[#0F8B5D]">}</span>
+            </div>
+            <!-- Removed lines (from old file) -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#FDECEA]">
+              <span class="text-xs text-[#D93025] w-8 text-right shrink-0">-15</span>
+              <span class="text-[#D93025]">export class OldVerifyService {</span>
+            </div>
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#FDECEA]">
+              <span class="text-xs text-[#D93025] w-8 text-right shrink-0">-16</span>
+              <span class="text-[#D93025]">&nbsp;&nbsp;// deprecated implementation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation / Comment Input Area -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-3">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:message-square-plus" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">人工批注</span>
+          <span class="text-xs text-[#6B7680]">对任意行添加评论 · 标记需要修改的代码段 · @提及开发团队成员</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2 text-xs text-[#6B7680]">
+            <span>当前批注行:</span>
+            <span class="px-2 py-0.5 text-xs font-semibold bg-[#FEF6E8] text-[#F59D0D] rounded-full">redis.store.ts:5</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="flex items-center gap-1 cursor-pointer text-xs text-[#4A5259]">
+              <input type="checkbox" class="accent-[#0D7C7C] w-3.5 h-3.5">
+              <span>标记需要修改</span>
+            </label>
+            <span class="text-xs text-[#9BA3AB]">|</span>
+            <label class="flex items-center gap-1 cursor-pointer text-xs text-[#4A5259]">
+              <input type="checkbox" class="accent-[#0D7C7C] w-3.5 h-3.5">
+              <span>标记已解决</span>
+            </label>
+          </div>
+          <textarea class="w-full min-h-[80px] px-3 py-2 text-sm text-[#1A1F24] bg-[hsla(200,15%,96%,1)] border border-[hsla(200,15%,95%,1)] rounded-lg resize-none focus:outline-none focus:border-[#0D7C7C] placeholder:text-[#9BA3AB]" placeholder="输入评论内容... 使用 @提及开发团队成员，例如 @张三 @后端开发Agent"></textarea>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <button class="flex items-center gap-1 px-3 py-1.5 text-xs bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full hover:bg-[hsla(200,15%,90%,1)] transition">
+                <iconify-icon icon="lucide:at-sign" class="text-sm"></iconify-icon>
+                <span>@提及</span>
+              </button>
+              <button class="flex items-center gap-1 px-3 py-1.5 text-xs bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full hover:bg-[hsla(200,15%,90%,1)] transition">
+                <iconify-icon icon="lucide:code" class="text-sm"></iconify-icon>
+                <span>引用代码</span>
+              </button>
+            </div>
+            <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 text-sm">
+              <iconify-icon icon="lucide:send" class="text-base"></iconify-icon>
+              <span>提交评论</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right: Review Report -->
+    <aside class="flex-shrink-0 min-w-fit w-[300px] m-3 flex flex-col gap-3 overflow-y-auto">
+
+      <!-- AI Review Summary Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">AI代码审查摘要</span>
+        </div>
+        <!-- Quality Score with Progress Bar -->
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-[#4A5259]">代码质量评分</span>
+            <div class="flex items-center gap-2">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full w-32">
+                <div class="bg-[#F59D0D] h-2 rounded-full" style="width:68%"></div>
+              </div>
+              <span class="text-sm font-semibold text-[#F59D0D]">68/100</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259]">复杂度</span>
+            <span class="px-3 py-1 text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D] rounded-full">低</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259]">测试覆盖率</span>
+            <div class="flex items-center gap-2">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full w-24">
+                <div class="bg-[#F59D0D] h-2 rounded-full" style="width:45%"></div>
+              </div>
+              <span class="text-sm font-semibold text-[#F59D0D]">45%</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259]">代码规范</span>
+            <div class="flex items-center gap-2">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full w-24">
+                <div class="bg-[#0F8B5D] h-2 rounded-full" style="width:92%"></div>
+              </div>
+              <span class="text-sm font-semibold text-[#0F8B5D]">92%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue List Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:list-checks" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">问题列表</span>
+          <span class="px-3 py-1 text-xs font-semibold bg-[#FDECEA] text-[#D93025] rounded-full">3</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <!-- Severe issue -->
+          <div class="bg-[#FDECEA] border border-[#D93025] rounded-lg px-3 py-2 cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:alert-circle" class="text-base text-[#D93025]"></iconify-icon>
+              </div>
+              <span class="px-2 py-0.5 text-xs font-semibold bg-[#D93025] text-white rounded-full">严重</span>
+            </div>
+            <p class="text-xs text-[#1A1F24] mt-1">验证码明文存储在Redis中</p>
+            <span class="text-xs text-[#9BA3AB]">redis.store.ts:5</span>
+          </div>
+          <!-- Warning -->
+          <div class="bg-[#FEF6E8] border border-[#F59D0D] rounded-lg px-3 py-2 cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:alert-triangle" class="text-base text-[#F59D0D]"></iconify-icon>
+              </div>
+              <span class="px-2 py-0.5 text-xs font-semibold bg-[#F59D0D] text-white rounded-full">警告</span>
+            </div>
+            <p class="text-xs text-[#1A1F24] mt-1">验证码比对未使用加密比较</p>
+            <span class="text-xs text-[#9BA3AB]">redis.store.ts:9</span>
+          </div>
+          <!-- Suggestion -->
+          <div class="bg-[#E8F0FE] border border-[#3367D6] rounded-lg px-3 py-2 cursor-pointer hover:shadow-[0_2px_8px_rgba(0,0,0,0.10)] transition">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:lightbulb" class="text-base text-[#3367D6]"></iconify-icon>
+              </div>
+              <span class="px-2 py-0.5 text-xs font-semibold bg-[#3367D6] text-white rounded-full">建议</span>
+            </div>
+            <p class="text-xs text-[#1A1F24] mt-1">添加验证码发送频率限制</p>
+            <span class="text-xs text-[#9BA3AB]">verify.service.ts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security Scan Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-alert" class="text-base text-[#D93025]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">安全扫描结果</span>
+          <span class="px-3 py-1 text-xs font-semibold bg-[#FDECEA] text-[#D93025] rounded-full">1 高危</span>
+        </div>
+        <div class="bg-[#FDECEA] rounded-lg px-3 py-2">
+          <span class="text-sm text-[#1A1F24]">敏感数据明文存储</span>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="px-2 py-0.5 text-xs font-semibold bg-[#D93025] text-white rounded-full">高危</span>
+            <span class="text-xs text-[#6B7680]">建议使用AES加密</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test Results Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:test-tubes" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">测试执行结果</span>
+        </div>
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-[#4A5259]">单元测试通过率</span>
+            <span class="px-3 py-1 text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D] rounded-full">80%</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-[#4A5259]">集成测试</span>
+            <span class="px-3 py-1 text-xs font-semibold bg-[#FEF6E8] text-[#F59D0D] rounded-full">2个失败</span>
+          </div>
+          <a href="task-detail.html" class="text-xs text-[#0D7C7C] flex items-center gap-1 hover:opacity-80">
+            <span>查看失败用例</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:external-link" class="text-base"></iconify-icon>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Review Action Buttons Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:git-pull-request" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">审核操作</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <!-- Approve button (disabled) -->
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0F8B5D] text-white/95 rounded-full transition hover:opacity-80 opacity-50 cursor-not-allowed w-full justify-center" disabled>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:check-circle" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">批准合并</span>
+          </button>
+          <!-- Modify button -->
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#F59D0D] text-white/95 rounded-full transition hover:opacity-80 w-full justify-center">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:pencil" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">要求修改</span>
+          </button>
+          <!-- Reject button -->
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#D93025] text-white/95 rounded-full transition hover:opacity-80 w-full justify-center">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:x-circle" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">拒绝合并</span>
+          </button>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-[#0D7C7C]">
+          <a href="task-detail.html" class="hover:opacity-80">完整测试报告</a>
+          <a href="deploy-monitoring.html" class="hover:opacity-80">部署预览环境</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+</body>
+</html>

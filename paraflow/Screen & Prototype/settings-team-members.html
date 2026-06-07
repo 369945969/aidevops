@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>团队成员 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between w-full px-8 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+      </div>
+      <ul class="flex items-center gap-6 text-sm">
+        <li><a href="dashboard.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">工作流看板</a></li>
+        <li><a href="requirements.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">需求管理</a></li>
+        <li><a href="knowledge-base.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">知识库</a></li>
+        <li><a href="settings.html" class="text-[#0D7C7C] font-semibold cursor-pointer">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+        </div>
+        <span>搜索...</span>
+      </div>
+      <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">新建需求</span>
+      </a>
+      <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+      </a>
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar Nav -->
+    <aside class="flex-shrink-0 min-w-fit w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] py-4">
+      <nav class="flex flex-col">
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:cpu" class="text-base"></iconify-icon>
+          </div>
+          <span>自动化配置</span>
+        </a>
+        <a href="settings-review-rules.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
+          </div>
+          <span>审核规则</span>
+        </a>
+        <a href="settings-dev-environment.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:terminal" class="text-base"></iconify-icon>
+          </div>
+          <span>开发环境</span>
+        </a>
+        <a href="settings-model-management.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:brain" class="text-base"></iconify-icon>
+          </div>
+          <span>模型管理</span>
+        </a>
+        <a href="settings-ai-agent.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base"></iconify-icon>
+          </div>
+          <span>AI Agent配置</span>
+        </a>
+        <a href="settings-team-members.html" class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#0D7C7C] border-l-2 border-[#0D7C7C] bg-[hsla(200,20%,98%,1)] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:users" class="text-base"></iconify-icon>
+          </div>
+          <span>团队成员</span>
+        </a>
+        <a href="settings-notifications.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base"></iconify-icon>
+          </div>
+          <span>通知设置</span>
+        </a>
+        <a href="settings-integrations.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plug" class="text-base"></iconify-icon>
+          </div>
+          <span>集成配置</span>
+        </a>
+        <a href="settings-security.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:lock" class="text-base"></iconify-icon>
+          </div>
+          <span>安全与权限</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:credit-card" class="text-base"></iconify-icon>
+          </div>
+          <span>账单与订阅</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Page Title + Actions -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">团队成员</h1>
+        <div class="flex items-center gap-3">
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:user-plus" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">邀请新成员</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Member List Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">成员列表</h3>
+          <p class="text-sm text-[#6B7680] mt-1">管理团队成员及角色权限分配</p>
+        </div>
+
+        <!-- Member 1: Alex - 技术负责人 -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-10 h-10 rounded-full">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">Alex Chen</span>
+                <span class="text-xs text-[#6B7680]">技术负责人</span>
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                </div>
+                在线
+              </div>
+            </div>
+            <div>
+              <span class="text-xs text-[#4A5259]">角色权限</span>
+              <div class="flex items-center gap-4 mt-2">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="alex-role" class="sr-only peer" checked>
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#0D7C7C] font-semibold">管理员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="alex-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">成员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="alex-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">观察者</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 2: Sarah - 产品经理 -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-10 h-10 rounded-full">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">Sarah Wang</span>
+                <span class="text-xs text-[#6B7680]">产品经理</span>
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                </div>
+                在线
+              </div>
+            </div>
+            <div>
+              <span class="text-xs text-[#4A5259]">角色权限</span>
+              <div class="flex items-center gap-4 mt-2">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="sarah-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">管理员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="sarah-role" class="sr-only peer" checked>
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#0D7C7C] font-semibold">成员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="sarah-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">观察者</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 3: Mike - 前端开发 -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=mike" alt="Mike" class="w-10 h-10 rounded-full">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">Mike Liu</span>
+                <span class="text-xs text-[#6B7680]">前端开发</span>
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#9BA3AB]">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:circle" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                </div>
+                离线
+              </div>
+            </div>
+            <div>
+              <span class="text-xs text-[#4A5259]">角色权限</span>
+              <div class="flex items-center gap-4 mt-2">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="mike-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">管理员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="mike-role" class="sr-only peer" checked>
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#0D7C7C] font-semibold">成员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="mike-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">观察者</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 4: Emma - 后端开发 -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=emma" alt="Emma" class="w-10 h-10 rounded-full">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">Emma Zhang</span>
+                <span class="text-xs text-[#6B7680]">后端开发</span>
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                </div>
+                在线
+              </div>
+            </div>
+            <div>
+              <span class="text-xs text-[#4A5259]">角色权限</span>
+              <div class="flex items-center gap-4 mt-2">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="emma-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">管理员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="emma-role" class="sr-only peer" checked>
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#0D7C7C] font-semibold">成员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="emma-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">观察者</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 5: David - DevOps -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=david" alt="David" class="w-10 h-10 rounded-full">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm font-semibold text-[#1A1F24]">David Li</span>
+                <span class="text-xs text-[#6B7680]">DevOps工程师</span>
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#9BA3AB]">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:circle" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                </div>
+                离线
+              </div>
+            </div>
+            <div>
+              <span class="text-xs text-[#4A5259]">角色权限</span>
+              <div class="flex items-center gap-4 mt-2">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="david-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">管理员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="david-role" class="sr-only peer" checked>
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#0D7C7C] font-semibold">成员</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="david-role" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">观察者</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Member Activity Statistics Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">成员活跃度统计</h3>
+          <p class="text-sm text-[#6B7680] mt-1">查看团队成员近期活跃情况</p>
+        </div>
+        <div class="grid grid-cols-5 gap-3">
+          <!-- Alex -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Alex</span>
+            <div class="w-full">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 95%;"></div>
+              </div>
+            </div>
+            <span class="text-xs text-[#0D7C7C] font-semibold">95%</span>
+          </div>
+          <!-- Sarah -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Sarah</span>
+            <div class="w-full">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 80%;"></div>
+              </div>
+            </div>
+            <span class="text-xs text-[#0D7C7C] font-semibold">80%</span>
+          </div>
+          <!-- Mike -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=mike" alt="Mike" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Mike</span>
+            <div class="w-full">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 60%;"></div>
+              </div>
+            </div>
+            <span class="text-xs text-[#0D7C7C] font-semibold">60%</span>
+          </div>
+          <!-- Emma -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=emma" alt="Emma" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Emma</span>
+            <div class="w-full">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 85%;"></div>
+              </div>
+            </div>
+            <span class="text-xs text-[#0D7C7C] font-semibold">85%</span>
+          </div>
+          <!-- David -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=david" alt="David" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">David</span>
+            <div class="w-full">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 45%;"></div>
+              </div>
+            </div>
+            <span class="text-xs text-[#0D7C7C] font-semibold">45%</span>
+          </div>
+        </div>
+      </div>
+
+    <!-- AI Team 绑定关系 Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-semibold text-[#1A1F24]">AI Team 绑定关系</h3>
+            <p class="text-sm text-[#6B7680] mt-1">查看团队成员与AI Team的对应关系</p>
+          </div>
+          <a href="settings-ai-agent.html" class="text-xs text-[#0D7C7C] hover:text-[#096363] cursor-pointer">
+            配置AI Agent &rarr;
+          </a>
+        </div>
+        <div class="grid grid-cols-5 gap-3">
+          <!-- Alex - 架构师Team + 测试Team -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Alex</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:layout" class="text-xs"></iconify-icon>
+              架构师
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:test-tubes" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              测试
+            </div>
+          </div>
+          <!-- Sarah - 需求分析师Team -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Sarah</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:file-text" class="text-xs"></iconify-icon>
+              需求分析师
+            </div>
+          </div>
+          <!-- Mike - 前端开发Team -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=mike" alt="Mike" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Mike</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:monitor" class="text-xs"></iconify-icon>
+              前端开发
+            </div>
+          </div>
+          <!-- Emma - 后端开发Team -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=emma" alt="Emma" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">Emma</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:database" class="text-xs"></iconify-icon>
+              后端开发
+            </div>
+          </div>
+          <!-- David - DevOps Team -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-2">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=david" alt="David" class="w-8 h-8 rounded-full">
+            <span class="text-xs font-semibold text-[#1A1F24]">David</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:server" class="text-xs"></iconify-icon>
+              DevOps
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-[#FEF6E8] border-t border-[#F59D0D] px-8 py-3 flex items-center justify-between">
+    <span class="text-sm text-[#F59D0D] font-semibold flex items-center gap-2">
+      <div class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:alert-circle" class="text-base text-[#F59D0D]"></iconify-icon>
+      </div>
+      您有未保存的更改
+    </span>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:x" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">取消</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">保存更改</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

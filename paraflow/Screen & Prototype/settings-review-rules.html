@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>审核规则 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between w-full px-8 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+      </div>
+      <ul class="flex items-center gap-6 text-sm">
+        <li><a href="dashboard.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">工作流看板</a></li>
+        <li><a href="requirements.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">需求管理</a></li>
+        <li><a href="knowledge-base.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">知识库</a></li>
+        <li><a href="settings.html" class="text-[#0D7C7C] font-semibold cursor-pointer">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+        </div>
+        <span>搜索...</span>
+      </div>
+      <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">新建需求</span>
+      </a>
+      <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+      </a>
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar Nav -->
+    <aside class="flex-shrink-0 min-w-fit w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] py-4">
+      <nav class="flex flex-col">
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:cpu" class="text-base"></iconify-icon>
+          </div>
+          <span>自动化配置</span>
+        </a>
+        <a href="settings-review-rules.html" class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#0D7C7C] border-l-2 border-[#0D7C7C] bg-[hsla(200,20%,98%,1)] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
+          </div>
+          <span>审核规则</span>
+        </a>
+        <a href="settings-dev-environment.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:terminal" class="text-base"></iconify-icon>
+          </div>
+          <span>开发环境</span>
+        </a>
+        <a href="settings-model-management.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:brain" class="text-base"></iconify-icon>
+          </div>
+          <span>模型管理</span>
+        </a>
+        <a href="settings-ai-agent.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base"></iconify-icon>
+          </div>
+          <span>AI Agent配置</span>
+        </a>
+        <a href="settings-team-members.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:users" class="text-base"></iconify-icon>
+          </div>
+          <span>团队成员</span>
+        </a>
+        <a href="settings-notifications.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base"></iconify-icon>
+          </div>
+          <span>通知设置</span>
+        </a>
+        <a href="settings-integrations.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plug" class="text-base"></iconify-icon>
+          </div>
+          <span>集成配置</span>
+        </a>
+        <a href="settings-security.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:lock" class="text-base"></iconify-icon>
+          </div>
+          <span>安全与权限</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:credit-card" class="text-base"></iconify-icon>
+          </div>
+          <span>账单与订阅</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Page Title + Actions -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">审核规则</h1>
+        <div class="flex items-center gap-3">
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">保存更改</span>
+          </button>
+          <a href="settings.html" class="text-sm text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">恢复默认设置</a>
+        </div>
+      </div>
+
+      <!-- Review Rules List Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-semibold text-[#1A1F24]">审核规则配置</h3>
+            <p class="text-sm text-[#6B7680] mt-1">定义触发审核的条件和处理方式</p>
+          </div>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">新增规则</span>
+          </button>
+        </div>
+
+        <!-- Rule 1: 架构变更审核 (ON) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">架构变更审核</span>
+              <p class="text-sm text-[#6B7680]">当架构方案涉及核心模块变更时触发审核</p>
+              <div class="flex items-center gap-4 mt-2">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">触发条件</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">核心模块变更</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">处理方式</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">技术负责人审核</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Rule 2: 代码合并审核 (ON) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">代码合并审核</span>
+              <p class="text-sm text-[#6B7680]">当合并请求涉及安全敏感文件时触发审核</p>
+              <div class="flex items-center gap-4 mt-2">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">触发条件</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">安全敏感文件</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">处理方式</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">双人审核</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Rule 3: 生产部署审核 (ON) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">生产部署审核</span>
+              <p class="text-sm text-[#6B7680]">所有生产环境部署必须经过审核</p>
+              <div class="flex items-center gap-4 mt-2">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">触发条件</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">生产环境部署</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">处理方式</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">运维负责人审核</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Rule 4: 依赖变更审核 (OFF) -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">依赖变更审核</span>
+              <p class="text-sm text-[#6B7680]">当第三方依赖版本变更时触发安全审核</p>
+              <div class="flex items-center gap-4 mt-2">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">触发条件</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">依赖版本变更</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs text-[#4A5259]">处理方式</label>
+                  <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+                    <span class="text-sm text-[#1A1F24]">自动化安全扫描</span>
+                    <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                      <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer">
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rule Template Selection Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">规则模板选择</h3>
+          <p class="text-sm text-[#6B7680] mt-1">从预定义模板快速创建审核规则</p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-xs text-[#4A5259]">选择模板</label>
+          <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+            <span class="text-sm text-[#1A1F24]">安全优先模板</span>
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-2xl p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:info" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#0D7C7C]">安全优先模板说明</span>
+          </div>
+          <p class="text-sm text-[#4A5259]">此模板包含6条预定义审核规则,覆盖架构变更、代码合并、生产部署等关键环节,适合对安全性要求较高的项目。</p>
+        </div>
+      </div>
+
+      <!-- Review Timeout Auto-processing Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">审核超时自动处理</h3>
+          <p class="text-sm text-[#6B7680] mt-1">当审核请求超过指定时间未响应时自动处理</p>
+        </div>
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">启用超时自动处理</span>
+              <p class="text-sm text-[#6B7680]">审核请求超过时限后自动按预设策略处理</p>
+            </div>
+            <label class="flex items-center gap-3">
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-12 h-6 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm peer-checked:translate-x-6 transition"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">超时时限(小时)</label>
+            <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+              <span class="text-sm text-[#1A1F24]">24小时</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">超时处理策略</label>
+            <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer">
+              <span class="text-sm text-[#1A1F24]">自动通过并标记</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-[#FEF6E8] border-t border-[#F59D0D] px-8 py-3 flex items-center justify-between">
+    <span class="text-sm text-[#F59D0D] font-semibold flex items-center gap-2">
+      <div class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:alert-circle" class="text-base text-[#F59D0D]"></iconify-icon>
+      </div>
+      您有未保存的更改
+    </span>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:x" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">取消</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">保存更改</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

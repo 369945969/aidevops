@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>AI Agent配置 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between w-full px-8 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+      </div>
+      <ul class="flex items-center gap-6 text-sm">
+        <li><a href="dashboard.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">工作流看板</a></li>
+        <li><a href="requirements.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">需求管理</a></li>
+        <li><a href="knowledge-base.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">知识库</a></li>
+        <li><a href="settings.html" class="text-[#0D7C7C] font-semibold cursor-pointer">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+        </div>
+        <span>搜索...</span>
+      </div>
+      <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">新建需求</span>
+      </a>
+      <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+      </a>
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar Nav -->
+    <aside class="flex-shrink-0 min-w-fit w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] py-4">
+      <nav class="flex flex-col">
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:cpu" class="text-base"></iconify-icon>
+          </div>
+          <span>自动化配置</span>
+        </a>
+        <a href="settings-review-rules.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
+          </div>
+          <span>审核规则</span>
+        </a>
+        <a href="settings-dev-environment.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:terminal" class="text-base"></iconify-icon>
+          </div>
+          <span>开发环境</span>
+        </a>
+        <a href="settings-model-management.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:brain" class="text-base"></iconify-icon>
+          </div>
+          <span>模型管理</span>
+        </a>
+        <a href="settings-ai-agent.html" class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#0D7C7C] border-l-2 border-[#0D7C7C] bg-[hsla(200,20%,98%,1)] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base"></iconify-icon>
+          </div>
+          <span>AI Agent配置</span>
+        </a>
+        <a href="settings-team-members.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:users" class="text-base"></iconify-icon>
+          </div>
+          <span>团队成员</span>
+        </a>
+        <a href="settings-notifications.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base"></iconify-icon>
+          </div>
+          <span>通知设置</span>
+        </a>
+        <a href="settings-integrations.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plug" class="text-base"></iconify-icon>
+          </div>
+          <span>集成配置</span>
+        </a>
+        <a href="settings-security.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:lock" class="text-base"></iconify-icon>
+          </div>
+          <span>安全与权限</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:credit-card" class="text-base"></iconify-icon>
+          </div>
+          <span>账单与订阅</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden overflow-y-auto flex flex-col px-8 py-6">
+
+      <!-- Page Title -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">AI Team 配置</h1>
+        <div class="flex items-center gap-3">
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">保存更改</span>
+          </button>
+          <a href="settings.html" class="text-sm text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">恢复默认设置</a>
+        </div>
+      </div>
+
+      <!-- Team Overview Stats Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">Team概览</h3>
+          <p class="text-sm text-[#6B7680] mt-1">6个AI Team，12个Agent运行中</p>
+        </div>
+        <div class="grid grid-cols-4 gap-3">
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-1">
+            <iconify-icon icon="lucide:users-round" class="text-lg text-[#0D7C7C]"></iconify-icon>
+            <span class="text-xs text-[#6B7680]">活跃Team</span>
+            <span class="text-sm font-semibold text-[#1A1F24]">5 / 6</span>
+          </div>
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-1">
+            <iconify-icon icon="lucide:bot" class="text-lg text-[#0D7C7C]"></iconify-icon>
+            <span class="text-xs text-[#6B7680]">Agent总数</span>
+            <span class="text-sm font-semibold text-[#1A1F24]">12</span>
+          </div>
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-1">
+            <iconify-icon icon="lucide:vote" class="text-lg text-[#0D7C7C]"></iconify-icon>
+            <span class="text-xs text-[#6B7680]">全票通过率</span>
+            <span class="text-sm font-semibold text-[#1A1F24]">78%</span>
+          </div>
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col items-center gap-1">
+            <iconify-icon icon="lucide:link" class="text-lg text-[#0D7C7C]"></iconify-icon>
+            <span class="text-xs text-[#6B7680]">人员绑定</span>
+            <span class="text-sm font-semibold text-[#1A1F24]">5 / 6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- Team 1: 需求分析师Team (EXPANDED) -->
+      <!-- ==================== -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col mb-6">
+        <!-- Team Header (always visible) -->
+        <div class="px-5 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+              <iconify-icon icon="lucide:file-text" class="text-base text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">需求分析师 Team</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              运行中
+            </div>
+            <!-- Bound human member -->
+            <div class="flex items-center gap-1 ml-2">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" class="w-6 h-6 rounded-full border-2 border-white" title="Sarah Wang">
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              Sarah Wang
+            </div>
+          </div>
+          <!-- Compact 全票通过 indicator -->
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:vote" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              全票通过
+            </div>
+            <div class="w-24">
+              <div class="h-1.5 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-1.5 bg-[#0D7C7C] rounded-full" style="width: 67%;"></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-[#0D7C7C]">2/3</span>
+          </div>
+          <!-- Toggle + Expand -->
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2">
+              <span class="text-xs text-[#6B7680]">启用</span>
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+            </label>
+            <iconify-icon icon="lucide:chevron-up" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+
+        <!-- Expanded Content -->
+        <div class="px-5 pb-5 space-y-3">
+
+          <!-- 撰写 Agent -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4 border-l-4 border-[#0D7C7C]">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs font-semibold">
+                  <iconify-icon icon="lucide:pen-line" class="text-xs"></iconify-icon>
+                  撰写
+                </div>
+                <span class="text-sm font-semibold text-[#1A1F24]">需求分析撰写</span>
+                <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                  <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                  运行中
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Model -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">主模型</span>
+              <div class="flex gap-2 mt-2 overflow-x-auto hide-scrollbar">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-primary-model" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:brain" class="text-sm"></iconify-icon>
+                    Claude Opus
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-primary-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:sparkles" class="text-sm"></iconify-icon>
+                    GPT-4o
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-primary-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:diamond" class="text-sm"></iconify-icon>
+                    Gemini Pro
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-primary-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:server" class="text-sm"></iconify-icon>
+                    DeepSeek
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Fallback Model -->
+            <div class="mt-3">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-semibold text-[#1A1F24]">备模型</span>
+                <div class="flex items-center gap-2 px-3 py-1 bg-[#FEF6E8] border border-[#F59D0D] rounded-full text-xs text-[#F59D0D]">
+                  <iconify-icon icon="lucide:alert-triangle" class="text-xs"></iconify-icon>
+                  主模型不可用时自动切换
+                </div>
+              </div>
+              <div class="flex gap-2 mt-2 overflow-x-auto hide-scrollbar">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-fallback-model" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:sparkles" class="text-sm"></iconify-icon>
+                    GPT-4o
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-fallback-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:diamond" class="text-sm"></iconify-icon>
+                    Gemini Pro
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-fallback-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:server" class="text-sm"></iconify-icon>
+                    DeepSeek
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- 技术偏好 -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">技术偏好</span>
+              <div class="flex items-center gap-4 mt-2">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-pref" class="sr-only peer" checked>
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#0D7C7C] font-semibold">结构化分析</span>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-writer-pref" class="sr-only peer">
+                  <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95">
+                    <svg fill="currentColor" class="w-2.5 h-2.5"><circle cx="10" cy="10" r="5"/></svg>
+                  </div>
+                  <span class="text-sm text-[#4A5259]">自由探索</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- 行为参数 -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">行为参数</span>
+              <div class="flex items-center gap-4 mt-2">
+                <span class="text-xs text-[#4A5259]">详细度</span>
+                <div class="flex-1">
+                  <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                    <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 70%;"></div>
+                  </div>
+                </div>
+                <span class="text-sm font-semibold text-[#0D7C7C]">70%</span>
+              </div>
+            </div>
+
+            <!-- 信任等级 -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">信任等级</span>
+              <div class="flex items-center gap-4 mt-2">
+                <div class="flex-1">
+                  <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                    <div class="h-2 bg-[#0D7C7C] rounded-full transition" style="width: 85%;"></div>
+                  </div>
+                </div>
+                <span class="text-sm font-semibold text-[#0D7C7C]">85%</span>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex items-center gap-4 mt-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:check-circle" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                任务完成: 42
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:clock" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                平均时长: 15分钟
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:trending-up" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                成功率: 97%
+              </div>
+            </div>
+          </div>
+
+          <!-- 审查 Agent -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4 border-l-4 border-[#5B7C92]">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 px-3 py-1 bg-[#5B7C92] text-white/95 rounded-full text-xs font-semibold">
+                  <iconify-icon icon="lucide:scan-search" class="text-xs"></iconify-icon>
+                  审查
+                </div>
+                <span class="text-sm font-semibold text-[#1A1F24]">需求分析审查</span>
+                <div class="flex items-center gap-2 px-3 py-1 bg-[#5B7C92] text-white/95 rounded-full text-xs">
+                  <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                  运行中
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Model -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">主模型</span>
+              <div class="flex gap-2 mt-2 overflow-x-auto hide-scrollbar">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-primary-model" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:brain" class="text-sm"></iconify-icon>
+                    Claude Sonnet
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-primary-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:sparkles" class="text-sm"></iconify-icon>
+                    GPT-4o
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-primary-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:diamond" class="text-sm"></iconify-icon>
+                    Gemini Pro
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-primary-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#0D7C7C] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:server" class="text-sm"></iconify-icon>
+                    DeepSeek
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Fallback Model -->
+            <div class="mt-3">
+              <div class="flex items-center gap-2">
+                <span class="text-sm font-semibold text-[#1A1F24]">备模型</span>
+                <div class="flex items-center gap-2 px-3 py-1 bg-[#FEF6E8] border border-[#F59D0D] rounded-full text-xs text-[#F59D0D]">
+                  <iconify-icon icon="lucide:alert-triangle" class="text-xs"></iconify-icon>
+                  主模型不可用时自动切换
+                </div>
+              </div>
+              <div class="flex gap-2 mt-2 overflow-x-auto hide-scrollbar">
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-fallback-model" class="sr-only peer" checked>
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:sparkles" class="text-sm"></iconify-icon>
+                    GPT-4o
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-fallback-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:diamond" class="text-sm"></iconify-icon>
+                    Gemini Pro
+                  </div>
+                </label>
+                <label class="flex items-center gap-2">
+                  <input type="radio" name="req-reviewer-fallback-model" class="sr-only peer">
+                  <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-4 py-2 rounded-full peer-checked:bg-[#5B7C92] peer-checked:text-white/95 hover:opacity-80 transition whitespace-nowrap flex items-center gap-2">
+                    <iconify-icon icon="lucide:server" class="text-sm"></iconify-icon>
+                    DeepSeek
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- 行为参数 -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">行为参数</span>
+              <div class="flex items-center gap-4 mt-2">
+                <span class="text-xs text-[#4A5259]">严谨度</span>
+                <div class="flex-1">
+                  <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                    <div class="h-2 bg-[#5B7C92] rounded-full transition" style="width: 90%;"></div>
+                  </div>
+                </div>
+                <span class="text-sm font-semibold text-[#5B7C92]">90%</span>
+              </div>
+            </div>
+
+            <!-- 信任等级 -->
+            <div class="mt-3">
+              <span class="text-sm font-semibold text-[#1A1F24]">信任等级</span>
+              <div class="flex items-center gap-4 mt-2">
+                <div class="flex-1">
+                  <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full">
+                    <div class="h-2 bg-[#5B7C92] rounded-full transition" style="width: 75%;"></div>
+                  </div>
+                </div>
+                <span class="text-sm font-semibold text-[#5B7C92]">75%</span>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex items-center gap-4 mt-3">
+              <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:check-circle" class="text-xs text-[#5B7C92]"></iconify-icon>
+                任务完成: 38
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:clock" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                平均时长: 10分钟
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+                <iconify-icon icon="lucide:trending-up" class="text-xs text-[#5B7C92]"></iconify-icon>
+                成功率: 95%
+              </div>
+            </div>
+          </div>
+
+          <!-- 添加Agent Button -->
+          <div class="flex items-center justify-center mt-2">
+            <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#4A5259] hover:opacity-80 transition">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+              </div>
+              <span class="whitespace-nowrap">添加Agent</span>
+            </button>
+          </div>
+
+          <!-- 全票通过机制 -->
+          <div class="bg-[hsla(200,20%,98%,1)] border border-[#0D7C7C] rounded-xl p-4 mt-2">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:vote" class="text-base text-[#0D7C7C]"></iconify-icon>
+                <span class="text-sm font-semibold text-[#0D7C7C]">全票通过机制</span>
+              </div>
+              <span class="text-xs text-[#6B7680]">Team输出需所有Agent确认后方可采纳</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <div class="w-2.5 h-2.5 bg-[#0D7C7C] rounded-full"></div>
+                <span class="text-xs text-[#1A1F24] font-semibold">撰写Agent</span>
+                <iconify-icon icon="lucide:check-circle" class="text-xs text-[#0F8B5D]"></iconify-icon>
+                <span class="text-xs text-[#0F8B5D]">已确认</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-2.5 h-2.5 bg-[#5B7C92] rounded-full"></div>
+                <span class="text-xs text-[#1A1F24] font-semibold">审查Agent</span>
+                <iconify-icon icon="lucide:check-circle" class="text-xs text-[#0F8B5D]"></iconify-icon>
+                <span class="text-xs text-[#0F8B5D]">已确认</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-2.5 h-2.5 bg-[#9BA3AB] rounded-full"></div>
+                <span class="text-xs text-[#9BA3AB]">补充Agent</span>
+                <iconify-icon icon="lucide:circle" class="text-xs text-[#9BA3AB]"></iconify-icon>
+                <span class="text-xs text-[#9BA3AB]">待确认</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 负责人绑定 -->
+          <div class="border-t border-[#E1E6EA] pt-4 mt-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:link" class="text-base text-[#0D7C7C]"></iconify-icon>
+                <span class="text-sm font-semibold text-[#1A1F24]">负责人绑定</span>
+              </div>
+              <a href="settings-team-members.html" class="text-xs text-[#0D7C7C] hover:text-[#096363] cursor-pointer">
+                管理团队成员 &rarr;
+              </a>
+            </div>
+            <div class="flex items-center gap-4 mt-2">
+              <div class="flex items-center gap-3 px-4 py-2 bg-white border border-[#E1E6EA] rounded-xl">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" class="w-8 h-8 rounded-full">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-sm font-semibold text-[#1A1F24]">Sarah Wang</span>
+                  <span class="text-xs text-[#6B7680]">产品经理</span>
+                </div>
+                <div class="flex items-center gap-2 px-2 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+                  <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+                  在线
+                </div>
+              </div>
+              <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full cursor-pointer hover:opacity-80 transition">
+                <iconify-icon icon="lucide:arrow-right-left" class="text-xs text-[#0D7C7C]"></iconify-icon>
+                <span class="text-xs text-[#4A5259]">更换负责人</span>
+                <iconify-icon icon="lucide:chevron-down" class="text-xs text-[#6B7680]"></iconify-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Stats Footer -->
+          <div class="flex items-center gap-4 mt-3 border-t border-[#E1E6EA] pt-3">
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:check-circle" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              Team任务: 42
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:clock" class="text-xs text-[#9BA3AB]"></iconify-icon>
+              平均时长: 20分钟
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:trending-up" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              成功率: 93%
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- Team 2: 架构师Team (COLLAPSED) -->
+      <!-- ==================== -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col mb-6">
+        <div class="px-5 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+              <iconify-icon icon="lucide:layout" class="text-base text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">架构师 Team</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              运行中
+            </div>
+            <div class="flex items-center gap-1 ml-2">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" class="w-6 h-6 rounded-full border-2 border-white" title="Alex Chen">
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              Alex Chen
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:vote" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              全票通过
+            </div>
+            <div class="w-24">
+              <div class="h-1.5 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-1.5 bg-[#0D7C7C] rounded-full" style="width: 100%;"></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-[#0D7C7C]">2/2</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2">
+              <span class="text-xs text-[#6B7680]">启用</span>
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+            </label>
+            <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- Team 3: 前端开发Team (COLLAPSED) -->
+      <!-- ==================== -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col mb-6">
+        <div class="px-5 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+              <iconify-icon icon="lucide:monitor" class="text-base text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">前端开发 Team</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              运行中
+            </div>
+            <div class="flex items-center gap-1 ml-2">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=mike" class="w-6 h-6 rounded-full border-2 border-white" title="Mike Liu">
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              Mike Liu
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:vote" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              全票通过
+            </div>
+            <div class="w-24">
+              <div class="h-1.5 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-1.5 bg-[#0D7C7C] rounded-full" style="width: 50%;"></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-[#9BA3AB]">1/2</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2">
+              <span class="text-xs text-[#6B7680]">启用</span>
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+            </label>
+            <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- Team 4: 后端开发Team (COLLAPSED) -->
+      <!-- ==================== -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col mb-6">
+        <div class="px-5 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+              <iconify-icon icon="lucide:database" class="text-base text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">后端开发 Team</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              运行中
+            </div>
+            <div class="flex items-center gap-1 ml-2">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=emma" class="w-6 h-6 rounded-full border-2 border-white" title="Emma Zhang">
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              Emma Zhang
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:vote" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              全票通过
+            </div>
+            <div class="w-24">
+              <div class="h-1.5 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-1.5 bg-[#0D7C7C] rounded-full" style="width: 100%;"></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-[#0D7C7C]">2/2</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2">
+              <span class="text-xs text-[#6B7680]">启用</span>
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+            </label>
+            <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- Team 5: 测试Team (COLLAPSED, 待命) -->
+      <!-- ==================== -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col mb-6">
+        <div class="px-5 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+              <iconify-icon icon="lucide:test-tubes" class="text-base text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">测试 Team</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#9BA3AB]">
+              <iconify-icon icon="lucide:pause" class="text-xs text-[#9BA3AB]"></iconify-icon>
+              待命
+            </div>
+            <div class="flex items-center gap-1 ml-2">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" class="w-6 h-6 rounded-full border-2 border-white" title="Alex Chen">
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              Alex Chen
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:vote" class="text-xs text-[#9BA3AB]"></iconify-icon>
+              全票通过
+            </div>
+            <div class="w-24">
+              <div class="h-1.5 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-1.5 bg-[#9BA3AB] rounded-full" style="width: 0%;"></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-[#9BA3AB]">0/2</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2">
+              <span class="text-xs text-[#6B7680]">启用</span>
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+            </label>
+            <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- Team 6: DevOps Team (COLLAPSED) -->
+      <!-- ==================== -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col mb-6">
+        <div class="px-5 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center w-8 h-8 bg-[#0D7C7C] rounded-lg">
+              <iconify-icon icon="lucide:server" class="text-base text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">DevOps Team</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              运行中
+            </div>
+            <div class="flex items-center gap-1 ml-2">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=david" class="w-6 h-6 rounded-full border-2 border-white" title="David Li">
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              David Li
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 text-xs text-[#4A5259]">
+              <iconify-icon icon="lucide:vote" class="text-xs text-[#0D7C7C]"></iconify-icon>
+              全票通过
+            </div>
+            <div class="w-24">
+              <div class="h-1.5 bg-[hsla(200,15%,95%,1)] rounded-full">
+                <div class="h-1.5 bg-[#0D7C7C] rounded-full" style="width: 100%;"></div>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-[#0D7C7C]">2/2</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <label class="flex items-center gap-2">
+              <span class="text-xs text-[#6B7680]">启用</span>
+              <div class="relative">
+                <input type="checkbox" class="sr-only peer" checked>
+                <div class="w-9 h-5 bg-[hsla(200,15%,95%,1)] rounded-full peer-checked:bg-[#0D7C7C] transition"></div>
+                <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+            </label>
+            <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-[#FEF6E8] border-t border-[#F59D0D] px-8 py-3 flex items-center justify-between">
+    <span class="text-sm text-[#F59D0D] font-semibold flex items-center gap-2">
+      <div class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:alert-circle" class="text-base text-[#F59D0D]"></iconify-icon>
+      </div>
+      您有未保存的更改
+    </span>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:x" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">取消</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">保存更改</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

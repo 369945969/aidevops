@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>新建需求 - AI DevOps Orchestrator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<!-- Vertical Layout: Top Header + Main Content (no sidebars) -->
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Header (Primary Nav) -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <!-- Nav Container per Style Guide -->
+    <div class="flex items-center justify-between w-full px-8 py-3">
+      <!-- Left Section -->
+      <div class="flex items-center gap-8">
+        <!-- Logo: icon-based per Style Guide -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-6 h-6">
+            <iconify-icon icon="lucide:workflow" class="text-xl text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-base font-semibold text-[#0D7C7C]">AI DevOps</span>
+        </div>
+        <!-- Menu Items -->
+        <div class="flex items-center gap-6">
+          <a href="dashboard.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:layout-grid" class="text-sm"></iconify-icon></div>
+            <span>工作流看板</span>
+          </a>
+          <a href="requirements.html" class="flex items-center gap-2 text-[#0D7C7C] font-semibold text-sm cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:file-text" class="text-sm"></iconify-icon></div>
+            <span>需求管理</span>
+          </a>
+          <a href="knowledge-base.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:library" class="text-sm"></iconify-icon></div>
+            <span>知识库</span>
+          </a>
+          <a href="settings.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:settings" class="text-sm"></iconify-icon></div>
+            <span>系统设置</span>
+          </a>
+        </div>
+      </div>
+      <!-- Right Section -->
+      <div class="flex items-center gap-4">
+        <!-- Notification per Style Guide -->
+        <a href="notification-panel.html" class="relative flex items-center justify-center w-10 h-10">
+          <iconify-icon icon="lucide:bell" class="w-5 h-5 text-[#4A5259]"></iconify-icon>
+          <div class="absolute -top-1 -right-1 w-5 h-5 bg-[#D93025] rounded-full flex items-center justify-center"><span class="text-xs text-white/95">3</span></div>
+        </a>
+        <!-- Avatar per Style Guide -->
+        <div class="flex items-center gap-2">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" class="w-9 h-9 rounded-full">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4">
+            <iconify-icon icon="lucide:chevron-down" class="text-sm text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container: flex per Style Guide -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+    <!-- Main Content Area (no sidebars, so use larger px) -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-12 py-6">
+
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 text-sm mb-4">
+        <a href="requirements.html" class="text-[#0D7C7C] hover:opacity-80 transition">需求管理</a>
+        <span class="text-[#6B7680]">/</span>
+        <span class="text-[#1A1F24]">新建需求</span>
+      </div>
+
+      <!-- Page Title Area -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">新建需求</h1>
+        <a href="requirements.html" class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:arrow-left" class="text-sm"></iconify-icon></div>
+          <span class="whitespace-nowrap text-sm">返回列表</span>
+        </a>
+      </div>
+
+      <!-- Section 1: Requirement Input Form -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-5 mb-6">
+        <!-- Section Header -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:pencil-line" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <h2 class="text-lg font-semibold text-[#1A1F24]">描述您的需求</h2>
+          <span class="bg-[#E8F0FE] text-[#3367D6] px-3 py-1 rounded-full text-xs font-semibold">自然语言输入</span>
+        </div>
+        <p class="text-sm text-[#6B7680]">用自然语言描述产品需求,AI将自动分析并生成结构化需求文档和开发计划</p>
+
+        <!-- Natural Language Input Area -->
+        <div class="flex flex-col gap-2">
+          <textarea
+            class="w-full h-[160px] bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-xl px-4 py-3 text-base text-[#1A1F24] placeholder-[#9BA3AB] resize-none focus:border-[#0D7C7C] focus:outline-none transition"
+            placeholder="请用自然语言描述您的产品需求..."
+          >用户注册流程中需要增加手机号短信验证码验证功能，确保用户身份真实性，减少虚假账号注册。支持中国大陆手机号格式，验证码为6位数字，有效期5分钟。用户输入手机号后点击"获取验证码"按钮，系统发送短信，用户输入验证码完成验证。验证成功后自动跳转到下一步注册流程。</textarea>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-[#9BA3AB]">建议包含: 功能目标、用户场景、关键约束条件</span>
+            <span class="text-sm text-[#9BA3AB]">156 / 2000 字</span>
+          </div>
+        </div>
+
+        <!-- File Attachment Area -->
+        <div class="flex flex-col gap-2">
+          <span class="text-sm font-semibold text-[#1A1F24]">附件上传</span>
+          <div class="flex items-center justify-center w-full h-[100px] bg-[hsla(200,15%,95%,1)] border-2 border-dashed border-[#E1E6EA] rounded-xl cursor-pointer hover:border-[#0D7C7C] transition">
+            <div class="flex flex-col items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-8 h-8">
+                <iconify-icon icon="lucide:upload-cloud" class="text-2xl text-[#6B7680]"></iconify-icon>
+              </div>
+              <span class="text-sm text-[#6B7680]">拖拽文件到此处,或点击上传</span>
+              <span class="text-xs text-[#9BA3AB]">支持 PDF、Word、图片,最大 10MB</span>
+            </div>
+          </div>
+          <!-- Attached file preview -->
+          <div class="flex items-center gap-3 bg-[hsla(200,15%,95%,1)] rounded-lg px-4 py-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:file-text" class="text-base text-[#3367D6]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#1A1F24]">注册流程设计文档.pdf</span>
+            <span class="text-xs text-[#9BA3AB]">2.3 MB</span>
+            <button class="flex items-center justify-center w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] transition hover:opacity-80">
+              <iconify-icon icon="lucide:x" class="text-sm text-[#6B7680]"></iconify-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Priority Selection -->
+        <div class="flex flex-col gap-2">
+          <span class="text-sm font-semibold text-[#1A1F24]">优先级</span>
+          <div class="flex items-center gap-4">
+            <!-- Radio buttons per Style Guide -->
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="priority" class="sr-only peer" checked>
+              <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95 transition">
+                <svg class="w-2 h-2" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+              </div>
+              <span class="text-sm text-[#1A1F24] flex items-center gap-2">
+                高
+                <span class="bg-[#FDECEA] text-[#D93025] px-2 py-0.5 rounded-full text-xs font-semibold">紧急</span>
+              </span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="priority" class="sr-only peer">
+              <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95 transition">
+                <svg class="w-2 h-2" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+              </div>
+              <span class="text-sm text-[#1A1F24]">中</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="priority" class="sr-only peer">
+              <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95 transition">
+                <svg class="w-2 h-2" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+              </div>
+              <span class="text-sm text-[#1A1F24]">低</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex items-center gap-3 mt-2">
+          <button class="flex items-center gap-2 px-6 py-3 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:sparkles" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap font-semibold">提交需求</span>
+          </button>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:save" class="text-sm"></iconify-icon></div>
+            <span class="whitespace-nowrap text-sm">保存草稿</span>
+          </button>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:rotate-ccw" class="text-sm"></iconify-icon></div>
+            <span class="whitespace-nowrap text-sm">重置</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section 2: AI Analysis Dialog -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-5 mb-6">
+        <!-- Section Header -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <h2 class="text-lg font-semibold text-[#1A1F24]">AI需求澄清对话</h2>
+          <span class="bg-[#E8F7F0] text-[#0F8B5D] px-3 py-1 rounded-full text-xs font-semibold">分析中</span>
+        </div>
+        <p class="text-sm text-[#6B7680]">AI正在分析您的需求描述,以下问题用于消除歧义并完善需求细节</p>
+
+        <!-- Chat-style conversation -->
+        <div class="flex flex-col gap-4">
+
+          <!-- Question 1 -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-[#0D7C7C] w-8 h-8 rounded-full">
+                <iconify-icon icon="lucide:bot" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <span class="text-sm font-semibold text-[#0D7C7C]">需求分析师</span>
+              <span class="text-xs text-[#9BA3AB]">提问 1/3</span>
+            </div>
+            <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:help-circle" class="text-base text-[#3367D6]"></iconify-icon>
+              </div>
+              <span class="text-sm text-[#1A1F24]">验证码有效期?</span>
+              <span class="text-xs text-[#6B7680]">您的描述中提到"有效期5分钟",是否确认验证码有效期为5分钟?是否需要提供过期后重新发送的机制?</span>
+            </div>
+            <!-- Sarah's Answer -->
+            <div class="flex items-start gap-2 ml-8">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-6 h-6 rounded-full mt-0.5">
+              <div class="flex flex-col gap-1 bg-[hsla(200,15%,95%,1)] rounded-lg px-4 py-2">
+                <span class="text-xs font-semibold text-[#0D7C7C]">Sarah</span>
+                <span class="text-sm text-[#1A1F24]">确认验证码有效期为5分钟。过期后用户需要重新获取验证码,原验证码自动失效。建议在UI上显示倒计时。</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-[#0D7C7C] w-8 h-8 rounded-full">
+                <iconify-icon icon="lucide:bot" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <span class="text-sm font-semibold text-[#0D7C7C]">需求分析师</span>
+              <span class="text-xs text-[#9BA3AB]">提问 2/3</span>
+            </div>
+            <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:help-circle" class="text-base text-[#3367D6]"></iconify-icon>
+              </div>
+              <span class="text-sm text-[#1A1F24]">是否支持国际号码?</span>
+              <span class="text-xs text-[#6B7680]">您提到"支持中国大陆手机号格式",是否需要考虑海外用户的国际号码验证?如果支持,需要哪些国家和地区?</span>
+            </div>
+            <!-- Sarah's Answer -->
+            <div class="flex items-start gap-2 ml-8">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-6 h-6 rounded-full mt-0.5">
+              <div class="flex flex-col gap-1 bg-[hsla(200,15%,95%,1)] rounded-lg px-4 py-2">
+                <span class="text-xs font-semibold text-[#0D7C7C]">Sarah</span>
+                <span class="text-sm text-[#1A1F24]">当前版本只支持中国大陆手机号(+86),国际号码支持作为v2.0的后续需求。架构上需要预留国际号码扩展能力。</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-[#0D7C7C] w-8 h-8 rounded-full">
+                <iconify-icon icon="lucide:bot" class="text-base text-white/95"></iconify-icon>
+              </div>
+              <span class="text-sm font-semibold text-[#0D7C7C]">需求分析师</span>
+              <span class="text-xs text-[#9BA3AB]">提问 3/3</span>
+            </div>
+            <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:help-circle" class="text-base text-[#3367D6]"></iconify-icon>
+              </div>
+              <span class="text-sm text-[#1A1F24]">发送失败重试机制?</span>
+              <span class="text-xs text-[#6B7680]">短信发送可能因网络或服务商问题失败,是否需要自动重试机制?重试次数和间隔如何设定?</span>
+            </div>
+            <!-- Response Input Area -->
+            <div class="flex items-start gap-2 ml-8">
+              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=sarah" alt="Sarah" class="w-6 h-6 rounded-full mt-0.5">
+              <div class="flex-1 flex flex-col gap-2">
+                <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-lg px-4 py-3 border border-[#0D7C7C]">
+                  <textarea
+                    class="w-full h-[60px] bg-transparent text-sm text-[#1A1F24] placeholder-[#9BA3AB] resize-none focus:outline-none border-none"
+                    placeholder="请输入您的回答..."
+                  >需要自动重试机制,最多重试3次,每次间隔30秒。超过重试次数后提示用户"短信发送失败,请稍后重试"。</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Complete Answers Button -->
+        <div class="flex items-center gap-3 mt-2">
+          <button class="flex items-center gap-2 px-6 py-3 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:check-circle" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap font-semibold">完成回答并提交分析</span>
+          </button>
+          <span class="text-sm text-[#9BA3AB] flex items-center gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4">
+              <iconify-icon icon="lucide:info" class="text-xs"></iconify-icon>
+            </div>
+            已回答 2/3 个问题
+          </span>
+        </div>
+      </div>
+
+      <!-- Section 3: AI Generated Requirement Document Preview -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-5 mb-6">
+        <!-- Section Header - Collapsible -->
+        <div class="flex items-center justify-between cursor-pointer" id="docPreviewHeader">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:file-check-2" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <h2 class="text-lg font-semibold text-[#1A1F24]">AI生成的需求文档预览</h2>
+            <span class="bg-[#E8F0FE] text-[#3367D6] px-3 py-1 rounded-full text-xs font-semibold">自动生成</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-[#9BA3AB]">REQ-0012</span>
+            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-[hsla(200,15%,95%,1)] transition hover:opacity-80" onclick="toggleDocPreview()">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:chevron-down" class="text-base text-[#4A5259]" id="docToggleIcon"></iconify-icon>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Collapsible Content -->
+        <div id="docPreviewContent" class="flex flex-col gap-5">
+
+          <!-- Business Objectives -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:target" class="text-base text-[#0D7C7C]"></iconify-icon>
+              </div>
+              <span class="text-base font-semibold text-[#1A1F24]">业务目标</span>
+            </div>
+            <div class="flex flex-col gap-2 ml-7">
+              <div class="flex items-start gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0D7C7C] mt-1.5"></span>
+                <span class="text-sm text-[#1A1F24]">提升用户注册真实性,减少虚假账号注册率降低80%</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0D7C7C] mt-1.5"></span>
+                <span class="text-sm text-[#1A1F24]">增强账号安全等级,满足金融监管合规要求</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#0D7C7C] mt-1.5"></span>
+                <span class="text-sm text-[#1A1F24]">改善注册转化体验,验证环节耗时控制在60秒以内</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Scenarios -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:users" class="text-base text-[#0D7C7C]"></iconify-icon>
+              </div>
+              <span class="text-base font-semibold text-[#1A1F24]">用户场景</span>
+            </div>
+            <div class="flex flex-col gap-3 ml-7">
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="px-2 py-0.5 bg-[#E8F0FE] text-[#3367D6] rounded-full text-xs font-semibold">场景1</span>
+                  <span class="text-sm font-semibold text-[#1A1F24]">新用户注册验证</span>
+                </div>
+                <p class="text-sm text-[#6B7680]">用户在注册页面输入手机号,点击"获取验证码",系统发送6位数字短信验证码(有效期5分钟),用户输入验证码完成身份验证,验证成功自动跳转下一步注册流程。</p>
+              </div>
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="px-2 py-0.5 bg-[#E8F0FE] text-[#3367D6] rounded-full text-xs font-semibold">场景2</span>
+                  <span class="text-sm font-semibold text-[#1A1F24]">验证码过期重发</span>
+                </div>
+                <p class="text-sm text-[#6B7680]">验证码超过5分钟有效期后自动失效,用户点击"重新获取"按钮,系统重新发送验证码,原验证码不再可用。UI显示倒计时提示剩余时间。</p>
+              </div>
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="px-2 py-0.5 bg-[#E8F0FE] text-[#3367D6] rounded-full text-xs font-semibold">场景3</span>
+                  <span class="text-sm font-semibold text-[#1A1F24]">短信发送失败</span>
+                </div>
+                <p class="text-sm text-[#6B7680]">短信发送失败时系统自动重试(最多3次,间隔30秒),超过重试次数后显示"短信发送失败,请稍后重试"提示,用户可手动重新触发发送。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Scope -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:layers" class="text-base text-[#0D7C7C]"></iconify-icon>
+              </div>
+              <span class="text-base font-semibold text-[#1A1F24]">功能范围</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 ml-7">
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA] flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:check" class="text-sm text-[#0F8B5D]"></iconify-icon>
+                  </div>
+                  <span class="text-sm font-semibold text-[#1A1F24]">核心功能</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="text-sm text-[#6B7680]">手机号格式校验(中国大陆+86)</span>
+                  <span class="text-sm text-[#6B7680]">验证码生成与发送(6位数字)</span>
+                  <span class="text-sm text-[#6B7680]">验证码输入与校验</span>
+                  <span class="text-sm text-[#6B7680]">验证码有效期管理(5分钟)</span>
+                  <span class="text-sm text-[#6B7680]">倒计时UI显示</span>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA] flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:shield" class="text-sm text-[#F59D0D]"></iconify-icon>
+                  </div>
+                  <span class="text-sm font-semibold text-[#1A1F24]">异常处理</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="text-sm text-[#6B7680]">短信发送自动重试(3次/30s间隔)</span>
+                  <span class="text-sm text-[#6B7680]">验证码过期自动失效</span>
+                  <span class="text-sm text-[#6B7680]">频率限制(同一号码60秒内限1次)</span>
+                  <span class="text-sm text-[#6B7680]">错误提示信息展示</span>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA] flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:package-plus" class="text-sm text-[#3367D6]"></iconify-icon>
+                  </div>
+                  <span class="text-sm font-semibold text-[#1A1F24]">扩展预留</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="text-sm text-[#6B7680]">国际号码验证架构预留(v2.0)</span>
+                  <span class="text-sm text-[#6B7680]">多短信服务商切换支持</span>
+                  <span class="text-sm text-[#6B7680]">验证码类型扩展(图形/语音)</span>
+                </div>
+              </div>
+              <div class="bg-white rounded-lg p-3 border border-[#E1E6EA] flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                  <div class="flex items-center justify-center bg-transparent w-4 h-4">
+                    <iconify-icon icon="lucide:exclude" class="text-sm text-[#6B7680]"></iconify-icon>
+                  </div>
+                  <span class="text-sm font-semibold text-[#1A1F24]">排除范围</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <span class="text-sm text-[#6B7680]">国际号码验证(v1.0不做)</span>
+                  <span class="text-sm text-[#6B7680]">语音验证码(v1.0不做)</span>
+                  <span class="text-sm text-[#6B7680]">邮箱验证(不在本项目范围)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Acceptance Criteria -->
+          <div class="flex flex-col gap-3 bg-[hsla(200,15%,95%,1)] rounded-xl p-4">
+            <div class="flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:clipboard-check" class="text-base text-[#0D7C7C]"></iconify-icon>
+              </div>
+              <span class="text-base font-semibold text-[#1A1F24]">验收标准</span>
+            </div>
+            <div class="flex flex-col gap-2 ml-7">
+              <div class="flex items-start gap-3 bg-white rounded-lg px-4 py-3 border border-[#E1E6EA]">
+                <span class="px-2 py-0.5 bg-[#0F8B5D]/10 text-[#0F8B5D] rounded-full text-xs font-semibold whitespace-nowrap">AC-1</span>
+                <span class="text-sm text-[#1A1F24]">用户可在注册页面输入中国大陆手机号并成功获取6位数字验证码</span>
+              </div>
+              <div class="flex items-start gap-3 bg-white rounded-lg px-4 py-3 border border-[#E1E6EA]">
+                <span class="px-2 py-0.5 bg-[#0F8B5D]/10 text-[#0F8B5D] rounded-full text-xs font-semibold whitespace-nowrap">AC-2</span>
+                <span class="text-sm text-[#1A1F24]">验证码在5分钟内有效,过期后自动失效且不可使用</span>
+              </div>
+              <div class="flex items-start gap-3 bg-white rounded-lg px-4 py-3 border border-[#E1E6EA]">
+                <span class="px-2 py-0.5 bg-[#0F8B5D]/10 text-[#0F8B5D] rounded-full text-xs font-semibold whitespace-nowrap">AC-3</span>
+                <span class="text-sm text-[#1A1F24]">验证成功后系统自动跳转到注册下一步流程</span>
+              </div>
+              <div class="flex items-start gap-3 bg-white rounded-lg px-4 py-3 border border-[#E1E6EA]">
+                <span class="px-2 py-0.5 bg-[#0F8B5D]/10 text-[#0F8B5D] rounded-full text-xs font-semibold whitespace-nowrap">AC-4</span>
+                <span class="text-sm text-[#1A1F24]">短信发送失败时系统自动重试最多3次(间隔30秒),超过后提示用户</span>
+              </div>
+              <div class="flex items-start gap-3 bg-white rounded-lg px-4 py-3 border border-[#E1E6EA]">
+                <span class="px-2 py-0.5 bg-[#0F8B5D]/10 text-[#0F8B5D] rounded-full text-xs font-semibold whitespace-nowrap">AC-5</span>
+                <span class="text-sm text-[#1A1F24]">同一手机号60秒内只能请求一次验证码,防止频繁发送</span>
+              </div>
+              <div class="flex items-start gap-3 bg-white rounded-lg px-4 py-3 border border-[#E1E6EA]">
+                <span class="px-2 py-0.5 bg-[#0F8B5D]/10 text-[#0F8B5D] rounded-full text-xs font-semibold whitespace-nowrap">AC-6</span>
+                <span class="text-sm text-[#1A1F24]">验证码输入界面显示倒计时(剩余有效时间)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Section 4: Submit for Architecture Review -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:rocket" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <h2 class="text-lg font-semibold text-[#1A1F24]">下一步操作</h2>
+          </div>
+          <span class="text-sm text-[#9BA3AB]">需求文档已生成,确认后进入架构审核流程</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="architecture-review.html" class="flex items-center gap-2 px-6 py-3 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:blocks" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap font-semibold">确认并提交架构审核</span>
+          </a>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:pencil" class="text-sm"></iconify-icon></div>
+            <span class="whitespace-nowrap text-sm">编辑需求文档</span>
+          </button>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:download" class="text-sm"></iconify-icon></div>
+            <span class="whitespace-nowrap text-sm">导出文档</span>
+          </button>
+        </div>
+
+        <!-- Flow Steps Indicator -->
+        <div class="flex items-center gap-4 bg-[hsla(200,15%,95%,1)] rounded-xl p-4 mt-2">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-[#0F8B5D] flex items-center justify-center">
+              <iconify-icon icon="lucide:check" class="text-xs text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#0F8B5D] font-semibold">需求描述</span>
+          </div>
+          <div class="flex-1 h-0.5 bg-[#0F8B5D]"></div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-[#0F8B5D] flex items-center justify-center">
+              <iconify-icon icon="lucide:check" class="text-xs text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#0F8B5D] font-semibold">AI澄清</span>
+          </div>
+          <div class="flex-1 h-0.5 bg-[#0F8B5D]"></div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-[#0D7C7C] flex items-center justify-center">
+              <iconify-icon icon="lucide:file-check" class="text-xs text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#0D7C7C] font-semibold">文档生成</span>
+          </div>
+          <div class="flex-1 h-0.5 bg-[#E1E6EA]"></div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] flex items-center justify-center">
+              <iconify-icon icon="lucide:blocks" class="text-xs text-[#9BA3AB]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#9BA3AB]">架构审核</span>
+          </div>
+          <div class="flex-1 h-0.5 bg-[#E1E6EA]"></div>
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] flex items-center justify-center">
+              <iconify-icon icon="lucide:code-2" class="text-xs text-[#9BA3AB]"></iconify-icon>
+            </div>
+            <span class="text-sm text-[#9BA3AB]">开发</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Simple toggle script for collapsed/expandable doc preview -->
+  <script>
+    function toggleDocPreview() {
+      const content = document.getElementById('docPreviewContent');
+      const icon = document.getElementById('docToggleIcon');
+      if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        icon.setAttribute('icon', 'lucide:chevron-down');
+      } else {
+        content.style.display = 'none';
+        icon.setAttribute('icon', 'lucide:chevron-right');
+      }
+    }
+  </script>
+
+</body>
+</html>

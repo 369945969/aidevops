@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>部署监控 - AI DevOps Orchestrator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <div class="flex items-center justify-between w-full px-8">
+      <!-- Nav Left -->
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-base font-semibold text-[#1A1F24]">AI DevOps</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="dashboard.html" class="text-sm font-semibold text-[#0D7C7C]">工作流看板</a>
+          <a href="requirements.html" class="text-sm text-[#4A5259] hover:text-[#0D7C7C]">需求管理</a>
+          <a href="knowledge-base.html" class="text-sm text-[#4A5259] hover:text-[#0D7C7C]">知识库</a>
+          <a href="settings.html" class="text-sm text-[#4A5259] hover:text-[#0D7C7C]">系统设置</a>
+        </div>
+      </div>
+      <!-- Nav Right -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:search" class="text-sm text-[#6B7680]"></iconify-icon>
+          </div>
+          <span class="text-sm text-[#9BA3AB]">搜索...</span>
+        </div>
+        <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon>
+          </div>
+          <span class="whitespace-nowrap text-sm">新建需求</span>
+        </a>
+        <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer relative">
+          <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+          <div class="absolute -top-1 -right-1 w-4 h-4 bg-[#D93025] rounded-full text-white text-xs flex items-center justify-center">1</div>
+        </a>
+        <div class="flex items-center gap-2 cursor-pointer">
+          <div class="w-8 h-8 rounded-full bg-[#E8F7F0] flex items-center justify-center overflow-hidden">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8">
+          </div>
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:chevron-down" class="text-sm text-[#6B7680]"></iconify-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container: Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Main Content -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 mb-4 text-sm">
+        <a href="dashboard.html" class="text-[#0D7C7C] hover:underline">工作流看板</a>
+        <span class="text-[#9BA3AB]">/</span>
+        <a href="deploy-review.html" class="text-[#0D7C7C] hover:underline">部署监控</a>
+        <span class="text-[#9BA3AB]">/</span>
+        <span class="text-[#1A1F24] font-semibold">REQ-0002</span>
+      </div>
+
+      <!-- Deploy Status Banner -->
+      <div class="bg-[#E8F7F0] border border-[#0F8B5D]/30 shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex items-center gap-4 px-6 py-4 mb-6">
+        <div class="w-3 h-3 rounded-full bg-[#0F8B5D] pulse-dot"></div>
+        <div class="flex items-center gap-3 flex-1">
+          <span class="text-lg font-semibold text-[#0F8B5D]">部署进行中</span>
+          <span class="text-sm text-[#4A5259]">REQ-0002 - 支付模块 v2.1.0 部署至生产环境</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-[#6B7680]">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:clock" class="text-sm text-[#0F8B5D]"></iconify-icon>
+          </div>
+          <span>已运行 8:32</span>
+        </div>
+      </div>
+
+      <!-- Pipeline Progress Chain -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-5 mb-6">
+        <h3 class="text-base font-semibold text-[#1A1F24] flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:git-merge" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          CI/CD 管线进度
+        </h3>
+
+        <!-- Horizontal Progress Chain -->
+        <div class="flex items-center gap-0 overflow-x-auto hide-scrollbar">
+          <!-- Step 1: 停止服务 - completed -->
+          <div class="flex flex-col items-center gap-2 min-w-[120px]">
+            <div class="w-10 h-10 bg-[#E8F7F0] rounded-xl flex items-center justify-center">
+              <iconify-icon icon="lucide:check" class="text-lg text-[#0F8B5D]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#0F8B5D]">停止服务</span>
+            <span class="text-xs text-[#9BA3AB]">2min</span>
+          </div>
+          <!-- Connector -->
+          <div class="flex-1 min-w-[40px] h-1 bg-[#0F8B5D] rounded-full"></div>
+
+          <!-- Step 2: 数据库迁移 - completed -->
+          <div class="flex flex-col items-center gap-2 min-w-[120px]">
+            <div class="w-10 h-10 bg-[#E8F7F0] rounded-xl flex items-center justify-center">
+              <iconify-icon icon="lucide:check" class="text-lg text-[#0F8B5D]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#0F8B5D]">数据库迁移</span>
+            <span class="text-xs text-[#9BA3AB]">3min</span>
+          </div>
+          <!-- Connector -->
+          <div class="flex-1 min-w-[40px] h-1 bg-[#0F8B5D] rounded-full"></div>
+
+          <!-- Step 3: 代码部署 - in progress -->
+          <div class="flex flex-col items-center gap-2 min-w-[120px]">
+            <div class="w-10 h-10 bg-[#0D7C7C] rounded-xl flex items-center justify-center pulse-dot">
+              <iconify-icon icon="lucide:package" class="text-lg text-white/95"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#0D7C7C]">代码部署</span>
+            <span class="text-xs text-[#0D7C7C] font-semibold">进行中...</span>
+          </div>
+          <!-- Connector (partial, in-progress) -->
+          <div class="flex-1 min-w-[40px] h-1 bg-[hsla(200,15%,95%,1)] rounded-full relative overflow-hidden">
+            <div class="absolute left-0 top-0 h-1 w-[40%] bg-[#0D7C7C] rounded-full"></div>
+          </div>
+
+          <!-- Step 4: 服务启动 - pending -->
+          <div class="flex flex-col items-center gap-2 min-w-[120px]">
+            <div class="w-10 h-10 bg-[hsla(200,15%,95%,1)] rounded-xl flex items-center justify-center">
+              <iconify-icon icon="lucide:server" class="text-lg text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#6B7680]">服务启动</span>
+            <span class="text-xs text-[#9BA3AB]">待执行</span>
+          </div>
+          <!-- Connector -->
+          <div class="flex-1 min-w-[40px] h-1 bg-[hsla(200,15%,95%,1)] rounded-full"></div>
+
+          <!-- Step 5: 健康检查 - pending -->
+          <div class="flex flex-col items-center gap-2 min-w-[120px]">
+            <div class="w-10 h-10 bg-[hsla(200,15%,95%,1)] rounded-xl flex items-center justify-center">
+              <iconify-icon icon="lucide:heart-pulse" class="text-lg text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#6B7680]">健康检查</span>
+            <span class="text-xs text-[#9BA3AB]">待执行</span>
+          </div>
+          <!-- Connector -->
+          <div class="flex-1 min-w-[40px] h-1 bg-[hsla(200,15%,95%,1)] rounded-full"></div>
+
+          <!-- Step 6: 流量切换 - pending -->
+          <div class="flex flex-col items-center gap-2 min-w-[120px]">
+            <div class="w-10 h-10 bg-[hsla(200,15%,95%,1)] rounded-xl flex items-center justify-center">
+              <iconify-icon icon="lucide:repeat" class="text-lg text-[#6B7680]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#6B7680]">流量切换</span>
+            <span class="text-xs text-[#9BA3AB]">待执行</span>
+          </div>
+        </div>
+
+        <!-- Progress Summary -->
+        <div class="flex items-center justify-between text-sm">
+          <div class="flex items-center gap-2 text-[#4A5259]">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:timer" class="text-xs text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span>总预估时间: 约17分钟</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="h-2 w-[200px] bg-[hsla(200,15%,95%,1)] rounded-full overflow-hidden">
+              <div class="h-2 bg-[#0D7C7C] rounded-full" style="width:47%"></div>
+            </div>
+            <span class="text-sm font-semibold text-[#0D7C7C]">47%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Log Output -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold text-[#1A1F24] flex items-center gap-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:terminal" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            实时部署日志
+          </h3>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full bg-[#0F8B5D] pulse-dot"></div>
+            <span class="text-sm text-[#0F8B5D]">实时</span>
+          </div>
+        </div>
+
+        <!-- Log Output Area -->
+        <div class="bg-[hsla(200,20%,92%,1)] rounded-xl p-4 overflow-y-auto max-h-[260px] code-font text-sm leading-[1.8]">
+          <!-- Timestamps and log lines -->
+          <div class="text-[#9BA3AB]">[08:00:01] <span class="text-[#0F8B5D]">INFO</span>  部署流水线启动 - REQ-0002</div>
+          <div class="text-[#9BA3AB]">[08:00:03] <span class="text-[#0F8B5D]">INFO</span>  Step 1: 停止服务开始...</div>
+          <div class="text-[#9BA3AB]">[08:00:15] <span class="text-[#0F8B5D]">INFO</span>  停止 auth-service 实例 (2/3)</div>
+          <div class="text-[#9BA3AB]">[08:00:28] <span class="text-[#0F8B5D]">INFO</span>  停止 verify-service 实例 (1/1)</div>
+          <div class="text-[#9BA3AB]">[08:02:01] <span class="text-[#0F8B5D]">INFO</span>  <span class="text-[#0F8B5D] font-semibold">Step 1 完成</span> - 停止服务 ✓ (耗时 2min)</div>
+          <div class="text-[#9BA3AB]">[08:02:03] <span class="text-[#0F8B5D]">INFO</span>  Step 2: 数据库迁移开始...</div>
+          <div class="text-[#9BA3AB]">[08:02:05] <span class="text-[#0F8B5D]">INFO</span>  执行迁移脚本: V20210606__create_verify_codes.sql</div>
+          <div class="text-[#9BA3AB]">[08:02:12] <span class="text-[#0F8B5D]">INFO</span>  CREATE TABLE verify_codes ... 成功</div>
+          <div class="text-[#9BA3AB]">[08:02:30] <span class="text-[#0F8B5D]">INFO</span>  数据备份完成: auth数据库全量备份</div>
+          <div class="text-[#9BA3AB]">[08:05:01] <span class="text-[#0F8B5D]">INFO</span>  <span class="text-[#0F8B5D] font-semibold">Step 2 完成</span> - 数据库迁移 ✓ (耗时 3min)</div>
+          <div class="text-[#9BA3AB]">[08:05:03] <span class="text-[#0F8B5D]">INFO</span>  Step 3: 代码部署开始...</div>
+          <div class="text-[#9BA3AB]">[08:05:10] <span class="text-[#0F8B5D]">INFO</span>  拉取镜像 verify-service:v2.1.0 ...</div>
+          <div class="text-[#9BA3AB]">[08:05:25] <span class="text-[#0F8B5D]">INFO</span>  拉取镜像 auth-service:v2.1.0 ...</div>
+          <div class="text-[#9BA3AB]">[08:06:40] <span class="text-[#0D7C7C]">DEPLOY</span>  部署 verify-service 容器 (1/3) ...</div>
+          <div class="text-[#9BA3AB]">[08:07:55] <span class="text-[#0D7C7C]">DEPLOY</span>  部署 auth-service 容器 (2/3) ...</div>
+          <div class="text-[#9BA3AB]">[08:08:32] <span class="text-[#0D7C7C]">DEPLOY</span>  部署 api-gateway 配置更新 ...</div>
+          <div class="text-[#9BA3AB]">[08:08:32] <span class="text-[#F59D0D]">WARN</span>   等待容器健康检查就绪...</div>
+          <div class="text-[#9BA3AB]">[08:08:33] <span class="text-[#0D7C7C]">DEPLOY</span>  <span class="text-[#0D7C7C] font-semibold">进行中</span> - 代码部署 (预计 5min)</div>
+        </div>
+      </div>
+
+      <!-- Deploy Version Info -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <h3 class="text-base font-semibold text-[#1A1F24] flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:tag" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          部署版本信息
+        </h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl p-4 flex flex-col gap-2">
+            <span class="text-xs text-[#6B7680]">当前版本</span>
+            <span class="text-sm font-semibold text-[#1A1F24] font-mono">v2.0.9</span>
+          </div>
+          <div class="bg-[#E8F7F0] rounded-xl p-4 flex flex-col gap-2">
+            <span class="text-xs text-[#0F8B5D]">目标版本</span>
+            <span class="text-sm font-semibold text-[#0F8B5D] font-mono">v2.1.0</span>
+          </div>
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl p-4 flex flex-col gap-2">
+            <span class="text-xs text-[#6B7680]">部署环境</span>
+            <span class="text-sm font-semibold text-[#1A1F24]">生产环境</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:git-commit" class="text-xs text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-[#4A5259]">Commit: <span class="font-mono text-[#1A1F24]">a3f7c2e</span> - 短信验证码模块上线</span>
+          </div>
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:user" class="text-xs text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-[#4A5259]">触发人: DevOps Agent</span>
+          </div>
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:calendar" class="text-xs text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-[#4A5259]">部署时间: 2026-06-06 02:00 (预约)</span>
+          </div>
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:box" class="text-xs text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-[#4A5259]">影响服务: auth-service, verify-service, api-gateway</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="flex-shrink-0 min-w-fit w-[340px] bg-[hsla(200,15%,97.5%,1)] border-l border-[#E1E6EA] p-6 flex flex-col gap-5 overflow-y-auto">
+
+      <!-- Deploy Health Metrics -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <h3 class="text-sm font-semibold text-[#1A1F24] flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:activity" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          部署健康指标
+        </h3>
+
+        <!-- API Response Time -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-[#4A5259]">API响应时间</span>
+            <span class="text-sm font-semibold text-[#0F8B5D]">128ms</span>
+          </div>
+          <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full overflow-hidden">
+            <div class="h-2 bg-[#0F8B5D] rounded-full" style="width:25%"></div>
+          </div>
+          <span class="text-xs text-[#9BA3AB]">基准: <500ms</span>
+        </div>
+
+        <!-- Error Rate -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-[#4A5259]">错误率</span>
+            <span class="text-sm font-semibold text-[#0F8B5D]">0.2%</span>
+          </div>
+          <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full overflow-hidden">
+            <div class="h-2 bg-[#0F8B5D] rounded-full" style="width:4%"></div>
+          </div>
+          <span class="text-xs text-[#9BA3AB]">阈值: <5%</span>
+        </div>
+
+        <!-- CPU Usage -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-[#4A5259]">CPU使用率</span>
+            <span class="text-sm font-semibold text-[#F59D0D]">62%</span>
+          </div>
+          <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full overflow-hidden">
+            <div class="h-2 bg-[#F59D0D] rounded-full" style="width:62%"></div>
+          </div>
+          <span class="text-xs text-[#9BA3AB]">部署期间CPU略高 (正常)</span>
+        </div>
+
+        <!-- Memory Usage -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-[#4A5259]">内存使用率</span>
+            <span class="text-sm font-semibold text-[#0F8B5D]">54%</span>
+          </div>
+          <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full overflow-hidden">
+            <div class="h-2 bg-[#0F8B5D] rounded-full" style="width:54%"></div>
+          </div>
+          <span class="text-xs text-[#9BA3AB]">基准: <80%</span>
+        </div>
+      </div>
+
+      <!-- Alert Status -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <h3 class="text-sm font-semibold text-[#1A1F24] flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell-ring" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          告警状态
+        </h3>
+        <div class="bg-[#E8F7F0] rounded-xl px-4 py-3 flex items-center gap-3">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:check-circle" class="text-sm text-[#0F8B5D]"></iconify-icon>
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-sm font-semibold text-[#0F8B5D]">无告警</span>
+            <span class="text-xs text-[#4A5259]">所有指标正常, 无触发告警</span>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <span class="text-[#4A5259]">P1 告警</span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">0</span>
+          </div>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <span class="text-[#4A5259]">P2 告警</span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">0</span>
+          </div>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <span class="text-[#4A5259]">P3 告警</span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rollback Button -->
+      <div class="flex flex-col gap-3">
+        <button class="flex items-center gap-2 px-4 py-2 bg-[#D93025] text-white/95 rounded-full transition hover:opacity-80 w-full justify-center">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:undo" class="text-sm"></iconify-icon>
+          </div>
+          <span class="whitespace-nowrap text-sm">紧急回滚</span>
+        </button>
+        <span class="text-xs text-[#9BA3AB] text-center">回滚至 v2.0.9, 预估耗时约5分钟</span>
+      </div>
+
+      <!-- Deploy History -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <h3 class="text-sm font-semibold text-[#1A1F24] flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:history" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          部署历史
+        </h3>
+
+        <!-- Last 3 Deployments -->
+        <div class="flex flex-col gap-3">
+          <!-- Deploy 1: Current (in progress) -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-[#0D7C7C] pulse-dot"></div>
+                <span class="text-sm font-semibold text-[#0D7C7C] font-mono">v2.1.0</span>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#0D7C7C] text-white/95">进行中</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+              <span>2026-06-06 08:00</span>
+              <span>REQ-0002</span>
+            </div>
+          </div>
+
+          <!-- Deploy 2: v2.0.9 - success -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:circle-dot" class="text-xs text-[#0F8B5D]"></iconify-icon>
+                </div>
+                <span class="text-sm font-semibold text-[#1A1F24] font-mono">v2.0.9</span>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">成功</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+              <span>2026-06-01 02:15</span>
+              <span>耗时 15min</span>
+            </div>
+          </div>
+
+          <!-- Deploy 3: v2.0.8 - success -->
+          <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:circle-dot" class="text-xs text-[#0F8B5D]"></iconify-icon>
+                </div>
+                <span class="text-sm font-semibold text-[#1A1F24] font-mono">v2.0.8</span>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">成功</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-[#9BA3AB]">
+              <span>2026-05-28 02:10</span>
+              <span>耗时 14min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex flex-col gap-2 text-sm">
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <span class="text-[#4A5259]">最近3次成功率</span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">100%</span>
+          </div>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <span class="text-[#4A5259]">平均部署耗时</span>
+            <span class="text-sm font-semibold text-[#1A1F24]">15分钟</span>
+          </div>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-xl px-4 py-2">
+            <span class="text-[#4A5259]">回滚次数</span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D]">0次</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Knowledge Base Quick Link -->
+      <a href="knowledge-base.html" class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl p-4 flex items-center gap-3 hover:opacity-80 transition">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:book-open" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-sm font-semibold text-[#0D7C7C]">查看知识库</span>
+      </a>
+
+    </aside>
+
+  </div>
+
+  <!-- Real-time Sync Indicator -->
+  <div class="w-[1440px] mx-auto flex items-center justify-end px-8 pb-4">
+    <div class="flex items-center gap-2 bg-white border border-[#E1E6EA] rounded-full px-4 py-2">
+      <div class="w-2 h-2 rounded-full bg-[#0F8B5D] pulse-dot"></div>
+      <span class="text-sm text-[#4A5259]">实时同步中</span>
+    </div>
+  </div>
+
+</body>
+</html>

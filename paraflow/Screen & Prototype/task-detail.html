@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>任务详情 - AI DevOps Orchestrator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<!-- Vertical Layout: Top Header + Two-Column (Main + Sidebar) -->
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Header (Primary Nav) -->
+  <header class="w-full bg-[hsla(200,15%,96%,1)]">
+    <!-- Nav Container per Style Guide -->
+    <div class="flex items-center justify-between w-full px-8 py-3">
+      <!-- Left Section -->
+      <div class="flex items-center gap-8">
+        <!-- Logo: icon-based per Style Guide -->
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-6 h-6">
+            <iconify-icon icon="lucide:workflow" class="text-xl text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-base font-semibold text-[#0D7C7C]">AI DevOps</span>
+        </div>
+        <!-- Menu Items: 工作流看板 is active -->
+        <div class="flex items-center gap-6">
+          <a href="dashboard.html" class="flex items-center gap-2 text-[#0D7C7C] font-semibold text-sm cursor-pointer">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:layout-grid" class="text-sm"></iconify-icon></div>
+            <span>工作流看板</span>
+          </a>
+          <a href="requirements.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:file-text" class="text-sm"></iconify-icon></div>
+            <span>需求管理</span>
+          </a>
+          <a href="knowledge-base.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:library" class="text-sm"></iconify-icon></div>
+            <span>知识库</span>
+          </a>
+          <a href="settings.html" class="flex items-center gap-2 text-[#4A5259] text-sm cursor-pointer hover:text-[#0D7C7C] transition">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:settings" class="text-sm"></iconify-icon></div>
+            <span>系统设置</span>
+          </a>
+        </div>
+      </div>
+      <!-- Right Section -->
+      <div class="flex items-center gap-4">
+        <!-- Search: Select/Dropdown style per Style Guide -->
+        <div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E1E6EA] rounded-full">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:search" class="text-sm text-[#6B7680]"></iconify-icon></div>
+          <span class="text-sm text-[#9BA3AB]">搜索任务或需求...</span>
+        </div>
+        <!-- New Requirement Button: text button per Style Guide -->
+        <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:plus" class="text-sm"></iconify-icon></div>
+          <span class="whitespace-nowrap text-sm">新建需求</span>
+        </a>
+        <!-- Notification per Style Guide -->
+        <a href="notification-panel.html" class="relative flex items-center justify-center w-10 h-10">
+          <iconify-icon icon="lucide:bell" class="w-5 h-5 text-[#4A5259]"></iconify-icon>
+          <div class="absolute -top-1 -right-1 w-5 h-5 bg-[#D93025] rounded-full flex items-center justify-center"><span class="text-xs text-white/95">3</span></div>
+        </a>
+        <!-- Avatar per Style Guide -->
+        <div class="flex items-center gap-2">
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" class="w-9 h-9 rounded-full">
+          <iconify-icon icon="lucide:chevron-down" class="w-4 h-4 text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container: Two-Column Layout per Style Guide -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Breadcrumb per Style Guide -->
+      <div class="flex items-center gap-2 text-sm text-[#6B7680] mb-4">
+        <a href="dashboard.html" class="text-[#0D7C7C]">工作流看板</a>
+        <span>/</span>
+        <a href="task-detail.html" class="text-[#0D7C7C]">任务详情</a>
+        <span>/</span>
+        <span class="text-[#1A1F24] font-semibold">TASK-007-A</span>
+      </div>
+
+      <!-- Task Overview Card: text-only card per Style Guide -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <!-- Header Row -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-semibold text-[#0D7C7C]">TASK-007-A</span>
+            <span class="text-lg font-semibold text-[#1A1F24]">短信验证码API接口</span>
+            <!-- Status Badge: 开发中 → function color per Style Guide -->
+            <div class="bg-[#E8F0FE] text-[#3367D6] px-3 py-1 rounded-full text-xs font-semibold">开发中</div>
+            <!-- Priority Tag: 高 → error color per Style Guide -->
+            <div class="bg-[#FDECEA] text-[#D93025] px-3 py-1 rounded-full text-xs font-semibold">高</div>
+            <!-- Task Type Tag -->
+            <div class="bg-[hsla(200,15%,95%,1)] text-[#4A5259] px-3 py-1 rounded-full text-xs font-semibold">后端</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <!-- Refresh Button -->
+            <button class="flex items-center gap-2 px-4 py-2 text-[#0D7C7C] rounded-full transition hover:opacity-80 text-sm border border-[#E1E6EA]">
+              <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:refresh-cw" class="text-sm"></iconify-icon></div>
+              <span class="whitespace-nowrap">刷新状态</span>
+            </button>
+            <!-- Pause Button -->
+            <button class="flex items-center gap-2 px-4 py-2 bg-[#FEF6E8] text-[#F59D0D] rounded-full transition hover:opacity-80 text-sm">
+              <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:pause" class="text-sm"></iconify-icon></div>
+              <span class="whitespace-nowrap">暂停任务</span>
+            </button>
+          </div>
+        </div>
+        <!-- AI Agent Info Row -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <!-- Agent Icon -->
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-[#E8F7F0]">
+              <iconify-icon icon="lucide:bot" class="text-lg text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <div class="flex flex-col gap-0.5">
+              <span class="text-sm font-semibold text-[#1A1F24]">后端开发Agent</span>
+              <span class="text-xs text-[#9BA3AB]">AI Agent 正在工作中</span>
+            </div>
+            <!-- Progress Percentage -->
+            <div class="flex items-center gap-2 ml-4">
+              <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full w-32">
+                <div class="h-2 bg-[#0D7C7C] rounded-full" style="width:75%"></div>
+              </div>
+              <span class="text-sm font-semibold text-[#0D7C7C]">75%</span>
+            </div>
+          </div>
+          <!-- Estimated Completion -->
+          <div class="flex items-center gap-2 text-sm text-[#4A5259]">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:clock" class="text-sm text-[#F59D0D]"></iconify-icon></div>
+            <span class="text-[#F59D0D] font-semibold">预计完成时间: 1小时后</span>
+          </div>
+        </div>
+        <!-- Real-time Sync Indicator -->
+        <div class="flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-[#0F8B5D] pulse-dot"></div>
+          <span class="text-xs text-[#4A5259]">实时同步中 · 最后更新: 30秒前</span>
+        </div>
+      </div>
+
+      <!-- Task Requirements / Scope Section -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <h3 class="text-base font-semibold text-[#1A1F24] flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:target" class="text-sm text-[#0D7C7C]"></iconify-icon></div>
+          任务需求与范围
+        </h3>
+        <p class="text-sm text-[#4A5259] leading-[1.8]">
+          实现短信验证码发送与校验的API接口，包括: 验证码生成、短信发送调用、Redis缓存存储(5分钟有效期)、频率限制(每手机号每天5次)、以及6位随机数字验证码生成逻辑。
+        </p>
+        <!-- Scope Items -->
+        <div class="flex flex-col gap-2">
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2 text-sm text-[#4A5259]">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:plus-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span>POST /api/verify/send — 验证码发送接口</span>
+          </div>
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2 text-sm text-[#4A5259]">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:plus-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span>POST /api/verify/check — 验证码校验接口</span>
+          </div>
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2 text-sm text-[#4A5259]">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:plus-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span>Redis存储模块 — 验证码缓存与过期管理</span>
+          </div>
+          <div class="flex items-center gap-2 bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2 text-sm text-[#4A5259]">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:plus-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span>频率限制模块 — IP与手机号双重限制</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Agent Real-time Work Log -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-semibold text-[#1A1F24] flex items-center gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:scroll-text" class="text-sm text-[#0D7C7C]"></iconify-icon></div>
+            AI Agent 实时工作日志
+          </h3>
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full bg-[#0F8B5D] pulse-dot"></div>
+            <span class="text-xs text-[#4A5259]">实时更新</span>
+          </div>
+        </div>
+        <!-- Scrollable Log Area -->
+        <div class="flex flex-col gap-3 max-h-[240px] overflow-y-auto pr-2">
+          <!-- Log Entry 1 -->
+          <div class="flex items-start gap-3">
+            <div class="flex flex-col items-center">
+              <div class="w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] flex items-center justify-center">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:eye" class="text-xs text-[#6B7680]"></iconify-icon></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-[#9BA3AB] bg-[hsla(200,15%,95%,1)] px-2 py-0.5 rounded-full">10:00</span>
+                <span class="text-sm text-[#1A1F24]">开始分析代码结构...</span>
+              </div>
+              <span class="text-xs text-[#9BA3AB]">分析现有项目结构，确定接口位置与模块依赖关系</span>
+            </div>
+          </div>
+          <!-- Log Entry 2 -->
+          <div class="flex items-start gap-3">
+            <div class="flex flex-col items-center">
+              <div class="w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] flex items-center justify-center">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:layout-list" class="text-xs text-[#6B7680]"></iconify-icon></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-[#9BA3AB] bg-[hsla(200,15%,95%,1)] px-2 py-0.5 rounded-full">10:15</span>
+                <span class="text-sm text-[#1A1F24]">设计Redis存储方案...</span>
+              </div>
+              <span class="text-xs text-[#9BA3AB]">确定验证码缓存策略: key格式、过期时间、频率计数器设计</span>
+            </div>
+          </div>
+          <!-- Log Entry 3 -->
+          <div class="flex items-start gap-3">
+            <div class="flex flex-col items-center">
+              <div class="w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] flex items-center justify-center">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:code-2" class="text-xs text-[#0D7C7C]"></iconify-icon></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-[#9BA3AB] bg-[hsla(200,15%,95%,1)] px-2 py-0.5 rounded-full">10:30</span>
+                <span class="text-sm text-[#1A1F24]">编写验证码发送接口...</span>
+              </div>
+              <span class="text-xs text-[#9BA3AB]">实现 POST /api/verify/send 接口，集成第三方短信服务SDK</span>
+            </div>
+          </div>
+          <!-- Log Entry 4 -->
+          <div class="flex items-start gap-3">
+            <div class="flex flex-col items-center">
+              <div class="w-6 h-6 rounded-full bg-[hsla(200,15%,95%,1)] flex items-center justify-center">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:shield" class="text-xs text-[#F59D0D]"></iconify-icon></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-[#9BA3AB] bg-[hsla(200,15%,95%,1)] px-2 py-0.5 rounded-full">10:45</span>
+                <span class="text-sm text-[#1A1F24]">实现频率限制逻辑...</span>
+              </div>
+              <span class="text-xs text-[#9BA3AB]">基于Redis计数器实现IP与手机号双重频率限制，防止滥用</span>
+            </div>
+          </div>
+          <!-- Log Entry 5 (current / in progress) -->
+          <div class="flex items-start gap-3 bg-[#E8F7F0] rounded-lg px-3 py-2 -mx-3">
+            <div class="flex flex-col items-center">
+              <div class="w-6 h-6 rounded-full bg-[#E8F7F0] flex items-center justify-center">
+                <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:flask-conical" class="text-xs text-[#0D7C7C]"></iconify-icon></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-[#0D7C7C] bg-[#E8F0FE] px-2 py-0.5 rounded-full">11:00</span>
+                <span class="text-sm font-semibold text-[#0D7C7C]">正在编写单元测试...</span>
+                <div class="w-2 h-2 rounded-full bg-[#0D7C7C] pulse-dot"></div>
+              </div>
+              <span class="text-xs text-[#4A5259]">为验证码发送与校验接口编写单元测试用例</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Output Preview -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col overflow-hidden mb-6">
+        <!-- File Header -->
+        <div class="flex items-center justify-between px-5 py-3 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+          <div class="flex items-center gap-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:file-code" class="text-base text-[#0D7C7C]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">src/verify/verify.controller.ts</span>
+            <span class="px-3 py-1 text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D] rounded-full">实时输出</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] rounded-full transition hover:opacity-80 text-sm">
+              <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:copy" class="text-sm"></iconify-icon></div>
+              <span class="whitespace-nowrap">复制代码</span>
+            </button>
+            <a href="code-review.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 text-sm">
+              <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:git-pull-request" class="text-sm"></iconify-icon></div>
+              <span class="whitespace-nowrap">查看完整代码</span>
+            </a>
+          </div>
+        </div>
+        <!-- Code Block -->
+        <div class="p-5 code-font text-sm leading-[1.8] overflow-y-auto max-h-[260px]">
+          <div class="flex flex-col">
+            <!-- Line 1 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">1</span>
+              <span class="text-[#4A5259]">import { Controller, Post, Body } from '@nestjs/common';</span>
+            </div>
+            <!-- Line 2 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">2</span>
+              <span class="text-[#4A5259]">import { VerifyService } from './verify.service';</span>
+            </div>
+            <!-- Line 3 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">3</span>
+              <span class="text-[#4A5259]">import { RedisVerifyStore } from './redis.store';</span>
+            </div>
+            <!-- Line 4 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">4</span>
+              <span class="text-[#4A5259]"></span>
+            </div>
+            <!-- Line 5 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">5</span>
+              <span class="text-[#0F8B5D]">@Controller('verify')</span>
+            </div>
+            <!-- Line 6 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">6</span>
+              <span class="text-[#0F8B5D]">export class VerifyController {</span>
+            </div>
+            <!-- Line 7 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">7</span>
+              <span class="text-[#4A5259]">&nbsp;&nbsp;constructor(private readonly verifyService: VerifyService) {}</span>
+            </div>
+            <!-- Line 8 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 hover:bg-[hsla(200,15%,96%,1)]">
+              <span class="text-xs text-[#9BA3AB] w-8 text-right shrink-0">8</span>
+              <span class="text-[#4A5259]"></span>
+            </div>
+            <!-- Line 9 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">9</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;@Post('send')</span>
+            </div>
+            <!-- Line 10 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">10</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;async sendCode(@Body('phone') phone: string) {</span>
+            </div>
+            <!-- Line 11 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">11</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;const result = await this.verifyService.sendVerifyCode(phone);</span>
+            </div>
+            <!-- Line 12 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">12</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;&nbsp;&nbsp;return { success: true, message: '验证码已发送' };</span>
+            </div>
+            <!-- Line 13 -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F7F0]">
+              <span class="text-xs text-[#0F8B5D] w-8 text-right shrink-0">13</span>
+              <span class="text-[#0F8B5D]">&nbsp;&nbsp;}</span>
+            </div>
+            <!-- Line 14 - current editing line -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F0FE] relative">
+              <span class="text-xs text-[#3367D6] w-8 text-right shrink-0">14</span>
+              <span class="text-[#3367D6]">&nbsp;&nbsp;@Post('check')</span>
+              <div class="flex items-center justify-center bg-transparent w-5 h-5 absolute right-4 cursor-pointer">
+                <iconify-icon icon="lucide:pencil" class="text-base text-[#3367D6]"></iconify-icon>
+              </div>
+            </div>
+            <!-- Cursor/typing indicator -->
+            <div class="flex items-center gap-3 px-2 py-0.5 bg-[#E8F0FE]">
+              <span class="text-xs text-[#3367D6] w-8 text-right shrink-0">15</span>
+              <span class="text-[#3367D6]">&nbsp;&nbsp;async checkCode(@Body('phone') phone: string, @Body('code') code: string) {|</span>
+            </div>
+            <!-- Truncation indicator -->
+            <div class="flex items-center justify-center py-2 text-xs text-[#9BA3AB]">
+              <iconify-icon icon="lucide:more-horizontal" class="text-base"></iconify-icon>
+              <span class="ml-1">Agent正在继续编写...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3 mb-6">
+        <a href="code-review.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:git-pull-request" class="text-sm"></iconify-icon></div>
+          <span class="whitespace-nowrap">查看代码审核</span>
+        </a>
+        <a href="requirement-detail.html" class="flex items-center gap-2 px-4 py-2 text-[#0D7C7C] rounded-full transition hover:opacity-80 border border-[#E1E6EA]">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:link" class="text-sm"></iconify-icon></div>
+          <span class="whitespace-nowrap">查看关联需求</span>
+        </a>
+        <a href="dashboard.html" class="flex items-center gap-2 px-4 py-2 text-[#4A5259] rounded-full transition hover:opacity-80 border border-[#E1E6EA]">
+          <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:arrow-left" class="text-sm"></iconify-icon></div>
+          <span class="whitespace-nowrap">返回看板</span>
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="flex-shrink-0 min-w-fit bg-[hsla(200,15%,97.5%,1)] px-6 py-6 flex flex-col gap-6 overflow-y-auto" style="width:320px">
+
+      <!-- Task Dependency Relationships -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:git-branch" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">任务依赖关系</span>
+        </div>
+        <!-- Depends on -->
+        <div class="flex flex-col gap-2">
+          <span class="text-xs text-[#9BA3AB] font-semibold">依赖的任务</span>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0008</span>
+              <span class="text-sm text-[#4A5259]">多语言支持模块</span>
+            </div>
+            <div class="bg-[#E8F7F0] text-[#0F8B5D] px-3 py-1 rounded-full text-xs font-semibold">已完成</div>
+          </div>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-[#0D7C7C]">REQ-0005-A</span>
+              <span class="text-sm text-[#4A5259]">用户权限管理API</span>
+            </div>
+            <div class="bg-[#E8F0FE] text-[#3367D6] px-3 py-1 rounded-full text-xs font-semibold">代码审查</div>
+          </div>
+        </div>
+        <!-- Blocks -->
+        <div class="flex flex-col gap-2">
+          <span class="text-xs text-[#9BA3AB] font-semibold">阻塞的任务</span>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-[#0D7C7C]">TASK-007-B</span>
+              <span class="text-sm text-[#4A5259]">手机号验证前端表单</span>
+            </div>
+            <div class="bg-[#FEF6E8] text-[#F59D0D] px-3 py-1 rounded-full text-xs font-semibold">等待中</div>
+          </div>
+          <div class="flex items-center justify-between bg-[hsla(200,15%,95%,1)] rounded-lg px-3 py-2">
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-semibold text-[#0D7C7C]">TASK-007-D</span>
+              <span class="text-sm text-[#4A5259]">验证码功能单元测试</span>
+            </div>
+            <div class="bg-[#FEF6E8] text-[#F59D0D] px-3 py-1 rounded-full text-xs font-semibold">待开始</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Agent Capabilities -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">AI Agent能力说明</span>
+        </div>
+        <p class="text-sm text-[#4A5259] leading-[1.8]">
+          后端开发Agent专长于Node.js后端服务开发,擅长API接口设计与实现、数据库操作、缓存策略和安全防护逻辑。支持自动生成RESTful接口、集成第三方服务SDK,以及编写配套的单元测试。
+        </p>
+        <!-- Capability tags -->
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 text-xs font-semibold bg-[#E8F0FE] text-[#3367D6] rounded-full">API开发</span>
+          <span class="px-3 py-1 text-xs font-semibold bg-[#E8F0FE] text-[#3367D6] rounded-full">数据库设计</span>
+          <span class="px-3 py-1 text-xs font-semibold bg-[#E8F0FE] text-[#3367D6] rounded-full">缓存策略</span>
+          <span class="px-3 py-1 text-xs font-semibold bg-[#E8F0FE] text-[#3367D6] rounded-full">安全防护</span>
+          <span class="px-3 py-1 text-xs font-semibold bg-[#E8F7F0] text-[#0F8B5D] rounded-full">单元测试</span>
+        </div>
+      </div>
+
+      <!-- Tech Stack Info -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:layers" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">技术栈信息</span>
+        </div>
+        <div class="flex flex-col gap-3">
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259] flex items-center gap-2">
+              <iconify-icon icon="simple-icons:nodedotjs" class="text-base text-[#0F8B5D]"></iconify-icon>
+              运行环境
+            </span>
+            <span class="font-semibold text-[#1A1F24]">Node.js 18</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259] flex items-center gap-2">
+              <iconify-icon icon="simple-icons:redis" class="text-base text-[#D93025]"></iconify-icon>
+              缓存服务
+            </span>
+            <span class="font-semibold text-[#1A1F24]">Redis 7</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259] flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:server" class="text-sm text-[#0D7C7C]"></iconify-icon></div>
+              框架
+            </span>
+            <span class="font-semibold text-[#1A1F24]">NestJS</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259] flex items-center gap-2">
+              <div class="flex items-center justify-center bg-transparent w-4 h-4"><iconify-icon icon="lucide:flask-conical" class="text-sm text-[#6B7680]"></iconify-icon></div>
+              测试框架
+            </span>
+            <span class="font-semibold text-[#1A1F24]">Jest</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-[#4A5259] flex items-center gap-2">
+              <iconify-icon icon="simple-icons:typescript" class="text-base text-[#3367D6]"></iconify-icon>
+              语言
+            </span>
+            <span class="font-semibold text-[#1A1F24]">TypeScript</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acceptance Criteria -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4">
+        <div class="flex items-center gap-2">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:check-square" class="text-base text-[#0D7C7C]"></iconify-icon>
+          </div>
+          <span class="text-sm font-semibold text-[#1A1F24]">完成标准</span>
+        </div>
+        <div class="flex flex-col gap-3 text-sm text-[#4A5259]">
+          <!-- Criterion 1 - completed -->
+          <div class="flex items-start gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4 mt-0.5"><iconify-icon icon="lucide:check-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span class="text-[#4A5259]">验证码发送接口返回正确响应格式</span>
+          </div>
+          <!-- Criterion 2 - completed -->
+          <div class="flex items-start gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4 mt-0.5"><iconify-icon icon="lucide:check-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span class="text-[#4A5259]">Redis存储方案: 5分钟过期 + 频率计数器</span>
+          </div>
+          <!-- Criterion 3 - completed -->
+          <div class="flex items-start gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4 mt-0.5"><iconify-icon icon="lucide:check-circle" class="text-sm text-[#0F8B5D]"></iconify-icon></div>
+            <span class="text-[#4A5259]">频率限制: IP + 手机号双重验证</span>
+          </div>
+          <!-- Criterion 4 - in progress -->
+          <div class="flex items-start gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4 mt-0.5"><iconify-icon icon="lucide:loader" class="text-sm text-[#0D7C7C]"></iconify-icon></div>
+            <span class="text-[#0D7C7C] font-semibold">单元测试覆盖率 >= 80%</span>
+          </div>
+          <!-- Criterion 5 - not started -->
+          <div class="flex items-start gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4 mt-0.5"><iconify-icon icon="lucide:circle" class="text-sm text-[#9BA3AB]"></iconify-icon></div>
+            <span class="text-[#6B7680]">代码通过安全扫描无高危问题</span>
+          </div>
+          <!-- Criterion 6 - not started -->
+          <div class="flex items-start gap-2">
+            <div class="flex items-center justify-center bg-transparent w-4 h-4 mt-0.5"><iconify-icon icon="lucide:circle" class="text-sm text-[#9BA3AB]"></iconify-icon></div>
+            <span class="text-[#6B7680]">接口文档自动生成(Swagger)</span>
+          </div>
+        </div>
+        <!-- Overall progress -->
+        <div class="flex items-center justify-between pt-2 border-t border-[#E1E6EA]">
+          <span class="text-sm text-[#4A5259]">完成标准达成</span>
+          <div class="flex items-center gap-2">
+            <div class="h-2 bg-[hsla(200,15%,95%,1)] rounded-full w-24">
+              <div class="h-2 bg-[#0D7C7C] rounded-full" style="width:50%"></div>
+            </div>
+            <span class="text-sm font-semibold text-[#0D7C7C]">3/6</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+</body>
+</html>

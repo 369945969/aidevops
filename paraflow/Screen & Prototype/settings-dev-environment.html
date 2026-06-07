@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>开发环境 - AI DevOps Orchestrator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body class="w-[1440px] min-h-[900px] mx-auto font-[-apple-system,BlinkMacSystemFont,'Segoe UI'] leading-[1.5]">
+
+  <!-- Top Navigation Bar -->
+  <header class="flex items-center justify-between w-full px-8 bg-[hsla(200,15%,96%,1)] border-b border-[#E1E6EA]">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:workflow" class="text-base text-[#0D7C7C]"></iconify-icon>
+        </div>
+        <span class="text-lg font-semibold text-[#1A1F24]">AI DevOps</span>
+      </div>
+      <ul class="flex items-center gap-6 text-sm">
+        <li><a href="dashboard.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">工作流看板</a></li>
+        <li><a href="requirements.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">需求管理</a></li>
+        <li><a href="knowledge-base.html" class="text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">知识库</a></li>
+        <li><a href="settings.html" class="text-[#0D7C7C] font-semibold cursor-pointer">系统设置</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] border border-[#E1E6EA] rounded-full text-sm text-[#6B7680]">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:search" class="text-base"></iconify-icon>
+        </div>
+        <span>搜索...</span>
+      </div>
+      <a href="new-requirement.html" class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">新建需求</span>
+      </a>
+      <a href="notification-panel.html" class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:bell" class="text-base text-[#4A5259]"></iconify-icon>
+      </a>
+      <div class="flex items-center gap-2 cursor-pointer">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=alex" alt="Alex" class="w-8 h-8 rounded-full">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:chevron-down" class="text-base text-[#6B7680]"></iconify-icon>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Two-Column Layout -->
+  <div class="w-full flex min-h-[900px] bg-[hsla(200,8%,99%,1)]">
+
+    <!-- Left Sidebar Nav -->
+    <aside class="flex-shrink-0 min-w-fit w-[220px] bg-[hsla(200,15%,97.5%,1)] border-r border-[#E1E6EA] py-4">
+      <nav class="flex flex-col">
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:cpu" class="text-base"></iconify-icon>
+          </div>
+          <span>自动化配置</span>
+        </a>
+        <a href="settings-review-rules.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:shield-check" class="text-base"></iconify-icon>
+          </div>
+          <span>审核规则</span>
+        </a>
+        <a href="settings-dev-environment.html" class="flex items-center gap-3 px-5 py-3 text-sm font-semibold text-[#0D7C7C] border-l-2 border-[#0D7C7C] bg-[hsla(200,20%,98%,1)] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:terminal" class="text-base"></iconify-icon>
+          </div>
+          <span>开发环境</span>
+        </a>
+        <a href="settings-model-management.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:brain" class="text-base"></iconify-icon>
+          </div>
+          <span>模型管理</span>
+        </a>
+        <a href="settings-ai-agent.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bot" class="text-base"></iconify-icon>
+          </div>
+          <span>AI Agent配置</span>
+        </a>
+        <a href="settings-team-members.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:users" class="text-base"></iconify-icon>
+          </div>
+          <span>团队成员</span>
+        </a>
+        <a href="settings-notifications.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:bell" class="text-base"></iconify-icon>
+          </div>
+          <span>通知设置</span>
+        </a>
+        <a href="settings-integrations.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:plug" class="text-base"></iconify-icon>
+          </div>
+          <span>集成配置</span>
+        </a>
+        <a href="settings-security.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:lock" class="text-base"></iconify-icon>
+          </div>
+          <span>安全与权限</span>
+        </a>
+        <a href="settings.html" class="flex items-center gap-3 px-5 py-3 text-sm text-[#4A5259] border-l-2 border-transparent hover:text-[#0D7C7C] cursor-pointer">
+          <div class="flex items-center justify-center bg-transparent w-5 h-5">
+            <iconify-icon icon="lucide:credit-card" class="text-base"></iconify-icon>
+          </div>
+          <span>账单与订阅</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-x-hidden flex flex-col px-8 py-6">
+
+      <!-- Page Title + Actions -->
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-semibold text-[#1A1F24]">开发环境</h1>
+        <div class="flex items-center gap-3">
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">保存更改</span>
+          </button>
+          <a href="settings.html" class="text-sm text-[#6B7680] hover:text-[#0D7C7C] cursor-pointer">恢复默认设置</a>
+        </div>
+      </div>
+
+      <!-- Code Repository Connection Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">代码仓库连接</h3>
+          <p class="text-sm text-[#6B7680] mt-1">配置代码仓库连接以支持自动化工作流</p>
+        </div>
+
+        <!-- GitHub -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:github" class="text-base text-[#1A1F24]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">GitHub</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              </div>
+              已连接
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">仓库URL</label>
+            <input type="text" value="https://github.com/ai-devops/main-project" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+          </div>
+        </div>
+
+        <!-- GitLab -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:git-branch" class="text-base text-[#1A1F24]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">GitLab</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#9BA3AB]">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:circle" class="text-xs text-[#9BA3AB]"></iconify-icon>
+              </div>
+              未连接
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">仓库URL</label>
+            <input type="text" placeholder="输入GitLab仓库URL" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+          </div>
+        </div>
+      </div>
+
+      <!-- CI/CD Configuration Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">CI/CD配置</h3>
+          <p class="text-sm text-[#6B7680] mt-1">配置持续集成和持续部署服务</p>
+        </div>
+
+        <!-- Jenkins -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:settings-2" class="text-base text-[#1A1F24]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">Jenkins</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-[#0D7C7C] text-white/95 rounded-full text-xs">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:check-circle" class="text-xs"></iconify-icon>
+              </div>
+              已配置
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">Jenkins URL</label>
+            <input type="text" value="https://jenkins.ai-devops.com" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+          </div>
+        </div>
+
+        <!-- GitLab CI -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:workflow" class="text-base text-[#1A1F24]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">GitLab CI</span>
+            <div class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#9BA3AB]">
+              <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                <iconify-icon icon="lucide:circle" class="text-xs text-[#9BA3AB]"></iconify-icon>
+              </div>
+              未配置
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs text-[#4A5259]">GitLab CI URL</label>
+            <input type="text" placeholder="输入GitLab CI URL" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud Service Credentials Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div>
+          <h3 class="text-base font-semibold text-[#1A1F24]">云服务凭证</h3>
+          <p class="text-sm text-[#6B7680] mt-1">管理云服务访问密钥(脱敏显示)</p>
+        </div>
+
+        <!-- AWS -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:cloud" class="text-base text-[#1A1F24]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">AWS</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">Access Key ID</label>
+              <input type="text" value="AKIA****************" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">Secret Access Key</label>
+              <input type="password" value="********************" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            </div>
+          </div>
+        </div>
+
+        <!-- 阿里云 -->
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:server" class="text-base text-[#1A1F24]"></iconify-icon>
+            </div>
+            <span class="text-sm font-semibold text-[#1A1F24]">阿里云</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">Access Key ID</label>
+              <input type="text" value="LTAI****************" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-xs text-[#4A5259]">Access Key Secret</label>
+              <input type="password" value="********************" class="w-full px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SSH Key Management Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-semibold text-[#1A1F24]">SSH密钥管理</h3>
+            <p class="text-sm text-[#6B7680] mt-1">管理用于服务器访问的SSH密钥</p>
+          </div>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">添加密钥</span>
+          </button>
+        </div>
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">部署密钥 (RSA 2048)</span>
+              <p class="text-sm text-[#6B7680]">用于生产服务器部署访问</p>
+              <span class="text-xs text-[#9BA3AB]">创建于 2025-01-15 | 最后使用 2026-06-05</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] transition hover:opacity-80">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:eye" class="text-xs"></iconify-icon>
+                </div>
+                查看
+              </button>
+              <button class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] transition hover:opacity-80">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:trash-2" class="text-xs"></iconify-icon>
+                </div>
+                删除
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1">
+              <span class="text-sm font-semibold text-[#1A1F24]">CI密钥 (Ed25519)</span>
+              <p class="text-sm text-[#6B7680]">用于CI/CD流水线自动拉取代码</p>
+              <span class="text-xs text-[#9BA3AB]">创建于 2025-03-20 | 最后使用 2026-06-06</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] transition hover:opacity-80">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:eye" class="text-xs"></iconify-icon>
+                </div>
+                查看
+              </button>
+              <button class="flex items-center gap-2 px-3 py-1 bg-white border border-[#E1E6EA] rounded-full text-xs text-[#4A5259] transition hover:opacity-80">
+                <div class="flex items-center justify-center bg-transparent w-5 h-5">
+                  <iconify-icon icon="lucide:trash-2" class="text-xs"></iconify-icon>
+                </div>
+                删除
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Environment Variables Card -->
+      <div class="bg-white shadow-[0_2px_8px_rgba(0,0,0,0.10)] rounded-2xl flex flex-col p-5 gap-4 mb-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-semibold text-[#1A1F24]">环境变量列表</h3>
+            <p class="text-sm text-[#6B7680] mt-1">配置运行时环境变量(键值对)</p>
+          </div>
+          <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+            <div class="flex items-center justify-center bg-transparent w-5 h-5">
+              <iconify-icon icon="lucide:plus" class="text-base"></iconify-icon>
+            </div>
+            <span class="whitespace-nowrap">添加变量</span>
+          </button>
+        </div>
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
+            <input type="text" value="NODE_ENV" class="px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            <input type="text" value="production" class="px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            <button class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer">
+              <iconify-icon icon="lucide:trash-2" class="text-base text-[#9BA3AB] hover:text-[#E5484D]"></iconify-icon>
+            </button>
+          </div>
+        </div>
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
+            <input type="text" value="API_BASE_URL" class="px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            <input type="text" value="https://api.ai-devops.com/v1" class="px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            <button class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer">
+              <iconify-icon icon="lucide:trash-2" class="text-base text-[#9BA3AB] hover:text-[#E5484D]"></iconify-icon>
+            </button>
+          </div>
+        </div>
+        <div class="bg-[hsla(200,15%,95%,1)] rounded-xl px-5 py-4">
+          <div class="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
+            <input type="text" value="DB_CONNECTION" class="px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            <input type="password" value="mongodb+srv://***:***@cluster.ai-devops.mongodb.net" class="px-3 py-2 bg-white border border-[#E1E6EA] rounded-lg focus:outline-none focus:border-[#CBD3DA] transition text-base">
+            <button class="flex items-center justify-center bg-transparent w-5 h-5 cursor-pointer">
+              <iconify-icon icon="lucide:trash-2" class="text-base text-[#9BA3AB] hover:text-[#E5484D]"></iconify-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-[#FEF6E8] border-t border-[#F59D0D] px-8 py-3 flex items-center justify-between">
+    <span class="text-sm text-[#F59D0D] font-semibold flex items-center gap-2">
+      <div class="flex items-center justify-center bg-transparent w-5 h-5">
+        <iconify-icon icon="lucide:alert-circle" class="text-base text-[#F59D0D]"></iconify-icon>
+      </div>
+      您有未保存的更改
+    </span>
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:x" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">取消</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+        <div class="flex items-center justify-center bg-transparent w-5 h-5">
+          <iconify-icon icon="lucide:save" class="text-base"></iconify-icon>
+        </div>
+        <span class="whitespace-nowrap">保存更改</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+workspace/paraflow/product-index.json
+
+# Environment variables
+.env
+
+# macOS system files
+.DS_Store
