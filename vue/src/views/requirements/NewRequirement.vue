@@ -35,7 +35,7 @@
           <span class="text-sm font-semibold text-[#1A1F24]">优先级</span>
           <div class="flex items-center gap-4">
             <label v-for="p in priorities" :key="p.label" class="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="priority" class="sr-only peer" :checked="p.label === '高'">
+              <input type="radio" name="priority" class="sr-only peer" :value="p.label" v-model="priority">
               <div class="w-5 h-5 bg-[hsla(200,15%,95%,1)] rounded-full flex items-center justify-center peer-checked:bg-[#0D7C7C] text-transparent peer-checked:text-white/95 transition">
                 <svg class="w-2 h-2" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
               </div>
@@ -46,9 +46,9 @@
         </div>
 
         <div class="flex items-center gap-3 mt-2">
-          <button class="flex items-center gap-2 px-6 py-3 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80">
+          <button @click="submitRequirement" :disabled="submitting" class="flex items-center gap-2 px-6 py-3 bg-[#0D7C7C] text-white/95 rounded-full transition hover:opacity-80 disabled:opacity-50">
             <Icon icon="lucide:sparkles" class="text-base" />
-            <span class="whitespace-nowrap font-semibold">提交需求</span>
+            <span class="whitespace-nowrap font-semibold">{{ submitting ? '提交中...' : '提交需求' }}</span>
           </button>
           <button class="flex items-center gap-2 px-4 py-2 bg-[hsla(200,15%,95%,1)] text-[#4A5259] border border-[#E1E6EA] rounded-full transition hover:opacity-80">
             <Icon icon="lucide:save" class="text-sm" />
@@ -115,11 +115,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import TopNavBar from '../../layout/TopNavBar.vue'
+import { createRequirement } from '../../api/pipeline'
+import { usePipelineProgress } from '../../composables/usePipelineProgress'
 
-const requirementText = ref('用户注册流程中需要增加手机号短信验证码验证功能，确保用户身份真实性，减少虚假账号注册。支持中国大陆手机号格式，验证码为6位数字，有效期5分钟。用户输入手机号后点击"获取验证码"按钮，系统发送短信，用户输入验证码完成验证。验证成功后自动跳转到下一步注册流程。')
+const router = useRouter()
+const requirementText = ref('')
+const priority = ref('中')
+const submitting = ref(false)
+const submitError = ref(null)
+const pipelineId = ref(null)
 
 const priorities = [
   { label: '高', badge: '紧急', badgeClass: 'bg-[#FDECEA] text-[#D93025]' },
@@ -133,11 +141,64 @@ const aiQuestions = [
   { question: '发送失败重试机制?', detail: '短信发送可能因网络或服务商问题失败,是否需要自动重试机制?', answer: null },
 ]
 
-const flowSteps = [
-  { label: '需求描述', icon: 'lucide:check', bg: 'bg-[#0F8B5D]', textColor: 'text-white/95', textClass: 'text-[#0F8B5D] font-semibold', lineClass: 'bg-[#0F8B5D]' },
-  { label: 'AI澄清', icon: 'lucide:check', bg: 'bg-[#0F8B5D]', textColor: 'text-white/95', textClass: 'text-[#0F8B5D] font-semibold', lineClass: 'bg-[#0F8B5D]' },
-  { label: '文档生成', icon: 'lucide:file-check', bg: 'bg-[#0D7C7C]', textColor: 'text-white/95', textClass: 'text-[#0D7C7C] font-semibold', lineClass: 'bg-[#E1E6EA]' },
-  { label: '架构审核', icon: 'lucide:blocks', bg: 'bg-[hsla(200,15%,95%,1)]', textColor: 'text-[#9BA3AB]', textClass: 'text-[#9BA3AB]', lineClass: 'bg-[#E1E6EA]' },
-  { label: '开发', icon: 'lucide:code-2', bg: 'bg-[hsla(200,15%,95%,1)]', textColor: 'text-[#9BA3AB]', textClass: 'text-[#9BA3AB]', lineClass: 'bg-[#E1E6EA]' },
-]
+const progress = computed(() => pipelineId.value ? usePipelineProgress(pipelineId.value) : null)
+
+const flowSteps = computed(() => {
+  if (!pipelineId.value || !progress.value) {
+    return [
+      { label: '需求描述', icon: 'lucide:check', bg: 'bg-[#0F8B5D]', textColor: 'text-white/95', textClass: 'text-[#0F8B5D] font-semibold', lineClass: 'bg-[#0F8B5D]' },
+      { label: 'AI澄清', icon: 'lucide:check', bg: 'bg-[#0F8B5D]', textColor: 'text-white/95', textClass: 'text-[#0F8B5D] font-semibold', lineClass: 'bg-[#0F8B5D]' },
+      { label: '文档生成', icon: 'lucide:file-check', bg: 'bg-[#0D7C7C]', textColor: 'text-white/95', textClass: 'text-[#0D7C7C] font-semibold', lineClass: 'bg-[#E1E6EA]' },
+      { label: '架构审核', icon: 'lucide:blocks', bg: 'bg-[hsla(200,15%,95%,1)]', textColor: 'text-[#9BA3AB]', textClass: 'text-[#9BA3AB]', lineClass: 'bg-[#E1E6EA]' },
+      { label: '开发', icon: 'lucide:code-2', bg: 'bg-[hsla(200,15%,95%,1)]', textColor: 'text-[#9BA3AB]', textClass: 'text-[#9BA3AB]', lineClass: 'bg-[#E1E6EA]' },
+    ]
+  }
+
+  const stageMap = progress.value.stages.value
+  const stageOrder = ['requirement_analyst', 'architect', 'developer', 'tester', 'deployer']
+  const stepLabels = ['需求分析', '架构设计', '代码开发', '测试验证', '部署上线']
+
+  return stepLabels.map((label, idx) => {
+    const stageName = stageOrder[idx]
+    const stageState = stageMap[stageName]
+    let bg, textColor, textClass, lineClass, icon
+
+    if (stageState?.status === 'completed') {
+      bg = 'bg-[#0F8B5D]'; textColor = 'text-white/95'; textClass = 'text-[#0F8B5D] font-semibold'; lineClass = 'bg-[#0F8B5D]'; icon = 'lucide:check'
+    } else if (stageState?.status === 'running' || stageState?.status === 'paused_for_review') {
+      bg = 'bg-[#0D7C7C]'; textColor = 'text-white/95'; textClass = 'text-[#0D7C7C] font-semibold'; lineClass = 'bg-[#E1E6EA]'; icon = 'lucide:loader-2'
+    } else if (stageState?.status === 'failed') {
+      bg = 'bg-[#D93025]'; textColor = 'text-white/95'; textClass = 'text-[#D93025] font-semibold'; lineClass = 'bg-[#E1E6EA]'; icon = 'lucide:x-circle'
+    } else {
+      bg = 'bg-[hsla(200,15%,95%,1)]'; textColor = 'text-[#9BA3AB]'; textClass = 'text-[#9BA3AB]'; lineClass = 'bg-[#E1E6EA]'; icon = 'lucide:circle'
+    }
+
+    return { label, icon, bg, textColor, textClass, lineClass }
+  })
+})
+
+async function submitRequirement() {
+  if (!requirementText.value.trim()) {
+    submitError.value = '请输入需求描述'
+    return
+  }
+  submitting.value = true
+  submitError.value = null
+
+  try {
+    const res = await createRequirement({
+      description: requirementText.value.trim(),
+      priority: priority.value,
+      mode: 'full',
+    })
+    const data = res.data?.data
+    if (data?.pipeline_id) {
+      pipelineId.value = data.pipeline_id
+    }
+  } catch (err) {
+    submitError.value = err.response?.data?.error || '提交失败，请重试'
+  } finally {
+    submitting.value = false
+  }
+}
 </script>

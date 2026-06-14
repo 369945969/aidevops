@@ -6,8 +6,37 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(r *gin.Engine, h *handlers.Handler) {
+func SetupRoutes(r *gin.Engine, h *handlers.Handler, ph *handlers.PipelineHandler) {
 	api := r.Group("/api")
+
+	// 10. Pipeline & Business Logic (Multi-Agent DevOps)
+	pipeline := api.Group("/pipeline")
+	{
+		pipeline.GET("", ph.GetPipelines)
+		pipeline.GET("/:id", ph.GetPipeline)
+		pipeline.POST("/:id/run", ph.RunPipeline)
+		pipeline.GET("/:id/progress", ph.StreamPipelineProgress)
+		pipeline.POST("/:id/resume", ph.ResumePipelineReview)
+		pipeline.GET("/:id/artifacts", ph.GetPipelineArtifacts)
+	}
+
+	requirements := api.Group("/requirements")
+	{
+		requirements.GET("", ph.GetRequirements)
+		requirements.GET("/:id", ph.GetRequirement)
+		requirements.POST("", ph.CreateRequirement)
+	}
+
+	workflow := api.Group("/workflow")
+	{
+		workflow.GET("/tasks", ph.GetWorkflowTasks)
+	}
+
+	bizNotifications := api.Group("/biz-notifications")
+	{
+		bizNotifications.GET("", ph.GetNotifications)
+		bizNotifications.PUT("/:id/read", ph.MarkNotificationRead)
+	}
 
 	// 1. Automation Configuration
 	automation := api.Group("/automation")

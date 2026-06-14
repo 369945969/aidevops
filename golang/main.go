@@ -60,6 +60,12 @@ func main() {
 		&models.TeamMember{},
 		&models.PendingInvite{},
 		&models.MemberAITeamBinding{},
+		&models.Requirement{},
+		&models.Pipeline{},
+		&models.PipelineStage{},
+		&models.PipelineArtifact{},
+		&models.Notification{},
+		&models.WorkflowTask{},
 	)
 	if err != nil {
 		log.Fatalf("failed to auto migrate: %v", err)
@@ -70,6 +76,7 @@ func main() {
 	seedDB(db)
 
 	h := handlers.NewHandler(db)
+	ph := handlers.NewPipelineHandler(db)
 
 	r := gin.Default()
 	r.Use(func(c *gin.Context) {
@@ -83,7 +90,7 @@ func main() {
 		c.Next()
 	})
 
-	routes.SetupRoutes(r, h)
+	routes.SetupRoutes(r, h, ph)
 
 	port := os.Getenv("PORT")
 	if port == "" {

@@ -106,10 +106,148 @@
 </template>
 
 <script setup>
+import { ref, onMounted, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import TopNavBar from '../../layout/TopNavBar.vue'
 import PriorityBadge from '../../components/PriorityBadge.vue'
-import { kanbanColumns, statusConfig } from '../../data/mockData'
+import { getWorkflowTasks, getPipelines, getRequirements } from '../../api/pipeline'
+import { statusConfig } from '../../data/mockData'
 
 const filters = ['全部任务', '我的审核', '今日更新']
+const activeFilter = ref('全部任务')
+const loading = ref(true)
+const error = ref(null)
+
+const rawTasks = ref([])
+const rawPipelines = ref([])
+const rawRequirements = ref([])
+
+const stageNameMap = {
+  'requirement_analyst': { label: '需求分析', icon: 'lucide:file-text', iconColor: '#3367D6' },
+  'architect': { label: '架构设计', icon: 'lucide:blocks', iconColor: '#F59D0D' },
+  'developer': { label: '开发中', icon: 'lucide:code-2', iconColor: '#0F8B5D' },
+  'tester': { label: '测试', icon: 'lucide:test-tubes', iconColor: '#3367D6' },
+  'deployer': { label: '部署上线', icon: 'lucide:rocket', iconColor: '#6B7680' },
+}
+
+const statusMap = {
+  'pending': '等待中',
+  'running': '执行中',
+  'completed': '已完成',
+  'failed': '失败',
+  'paused_for_review': '需人工审核',
+  'skipped': '已跳过',
+}
+
+const requirementStatusMap = {
+  '待处理': '需求分析',
+  '分析中': '需求分析',
+  '进行中': '开发中',
+  '已完成': '已完成',
+  '失败': '失败',
+}
+
+const kanbanColumns = computed(() => {
+  const columns = [
+    { key: 'requirement-analysis', label: '需求分析', icon: 'lucide:file-text', iconColor: '#3367D6', count: 0, tasks: [] },
+    { key: 'architecture-design', label: '架构设计', icon: 'lucide:blocks', iconColor: '#F59D0D', count: 0, warning: false, tasks: [] },
+    { key: 'development', label: '开发中', icon: 'lucide:code-2', iconColor: '#0F8B5D', count: 0, tasks: [] },
+    { key: 'testing', label: '测试', icon: 'lucide:test-tubes', iconColor: '#3367D6', count: 0, tasks: [] },
+    { key: 'pending-review', label: '待审核', icon: 'lucide:shield-check', iconColor: '#F59D0D', bg: '#FEF6E8', count: 0, urgent: false, tasks: [] },
+    { key: 'completed', label: '已完成', icon: 'lucide:check-circle', iconColor: '#0F8B5D', count: 0, tasks: [] },
+  ]
+
+  // Build kanban from pipeline stages
+  for (const pipeline of rawPipelines.value) {
+    if (!pipeline.Stages || pipeline.Stages.length === 0) continue
+
+    for (const stage of pipeline.Stages) {
+      const stageInfo = stageNameMap[stage.StageName]
+      if (!stageInfo) continue
+
+      let colKey
+      if (stage.Status === 'paused_for_review') {
+        colKey = 'pending-review'
+      } else if (stage.Status === 'completed') {
+        colKey = 'completed'
+      } else if (stage.Status === 'failed') {
+        colKey = stage.StageName === 'requirement_analyst' ? 'requirement-analysis'
+          : stage.StageName === 'architect' ? 'architecture-design'
+          : stage.StageName === 'developer' ? 'development'
+          : stage.StageName === 'tester' ? 'testing'
+          : 'completed'
+      } else {
+        colKey = stage.StageName === 'requirement_analyst' ? 'requirement-analysis'
+          : stage.StageName === 'architect' ? 'architecture-design'
+          : stage.StageName === 'developer' ? 'development'
+          : stage.StageName === 'tester' ? 'testing'
+          : 'completed'
+      }
+
+      const col = columns.find(c => c.key === colKey)
+      if (!col) continue
+
+      const reqTitle = pipeline.Query || pipeline.Requirement?.Title || '未命名需求'
+      const shortTitle = reqTitle.length > 20 ? reqTitle.slice(0, 20) + '...' : reqTitle
+
+      col.tasks.push({
+        id: `REQ-${pipeline.ID}`,
+        title: shortTitle,
+        agent: stageInfo.label + ' Agent',
+        priority: pipeline.Requirement?.Priority || '中',
+        progress: stage.Status === 'completed' ? 100 : stage.Status === 'running' ? 50 : 0,
+        status: statusMap[stage.Status] || stage.Status,
+        estimate: stage.DurationMs ? `${Math.round(stage.DurationMs / 60000)}min` : null,
+        reviewRoute: stage.Status === 'paused_for_review' ? `/workflow/task/${pipeline.ID}` : null,
+      })
+      col.count++
+      if (stage.Status === 'paused_for_review') {
+        col.urgent = true
+        col.warning = true
+      }
+    }
+  }
+
+  // Also include requirements without pipelines
+  for (const req of rawRequirements.value) {
+    if (req.PipelineID === 0 || !req.PipelineID) {
+      const col = columns.find(c => c.key === 'requirement-analysis')
+      if (col && req.Status !== '已完成' && req.Status !== '失败') {
+        col.tasks.push({
+          id: `REQ-${req.ID}`,
+          title: req.Title || req.Description?.slice(0, 20) + '...',
+          agent: '需求分析师',
+          priority: req.Priority || '中',
+          progress: 0,
+          status: requirementStatusMap[req.Status] || req.Status,
+        })
+        col.count++
+      }
+    }
+  }
+
+  return columns
+})
+
+async function fetchData() {
+  loading.value = true
+  error.value = null
+  try {
+    const [tasksRes, pipelinesRes, requirementsRes] = await Promise.all([
+      getWorkflowTasks(),
+      getPipelines(),
+      getRequirements(),
+    ])
+    rawTasks.value = tasksRes.data?.data || []
+    rawPipelines.value = pipelinesRes.data?.data || []
+    rawRequirements.value = requirementsRes.data?.data || []
+  } catch (err) {
+    error.value = '数据加载失败，请刷新重试'
+    console.error('Failed to load dashboard data:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(fetchData)
 </script>
